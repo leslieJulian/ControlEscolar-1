@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "173250700267",
+    "firebase_url": "https://controlescolartec-b2f16.firebaseio.com",
+    "project_id": "controlescolartec-b2f16",
+    "storage_bucket": "controlescolartec-b2f16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173250700267:android:dedaa89b3604bbdb06afae",
+        "android_client_info": {
+          "package_name": "com.example.pruebasproyectofinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173250700267-s82esas8tgn9m3nc792ql9510p8icnaf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pruebasproyectofinal",
+            "certificate_hash": "3a27019dbf6866c55e6d066f5f765108570a0f0d"
+          }
+        },
+        {
+          "client_id": "173250700267-ib9mnc9untb6btt53ntq84d3r9ulmffo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGC3B7IMLODrmsq75aC5uHk9TxhTqpZGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173250700267-ib9mnc9untb6btt53ntq84d3r9ulmffo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
