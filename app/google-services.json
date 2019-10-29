@@ -8,6 +8,51 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:173250700267:android:03c75d9506578aa106afae",
+        "android_client_info": {
+          "package_name": "com.example.controlescolar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173250700267-f7aag721ddl2on7g6120tjg74ml7lcdh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.controlescolar",
+            "certificate_hash": "6eb62a6e1515564f4d92ad66725b43ce000e5d2c"
+          }
+        },
+        {
+          "client_id": "173250700267-tbi7tn0bel6go6rq16b40mk28rg202ma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.controlescolar",
+            "certificate_hash": "3a27019dbf6866c55e6d066f5f765108570a0f0d"
+          }
+        },
+        {
+          "client_id": "173250700267-ib9mnc9untb6btt53ntq84d3r9ulmffo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGC3B7IMLODrmsq75aC5uHk9TxhTqpZGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173250700267-ib9mnc9untb6btt53ntq84d3r9ulmffo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:173250700267:android:dedaa89b3604bbdb06afae",
         "android_client_info": {
           "package_name": "com.example.pruebasproyectofinal"
