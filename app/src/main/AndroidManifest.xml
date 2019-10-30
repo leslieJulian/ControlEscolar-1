@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".Lista_plan_estudios"
+            android:label="@string/title_activity_lista_plan_estudios"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Especialidad_act" />
+        <activity android:name=".Plan_de_estudios" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

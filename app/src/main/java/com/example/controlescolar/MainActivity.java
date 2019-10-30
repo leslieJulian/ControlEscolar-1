@@ -3,7 +3,9 @@ package com.example.controlescolar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
                             Tecnologico datosTec = dataSnapshot.getValue(Tecnologico.class);
                             TextView textView = findViewById(R.id.tvPrincipal);
                             textView.setText(datosTec.getNombre());
-                        }else{
+                        } else {
                             Toast.makeText(getApplicationContext(), "No existe el instituto con clave 520", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -38,5 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    public void abrirRegistarPlanes(View view) {
+        //Intent i = new Intent(this, Plan_de_estudios.class);
+        Intent i = new Intent(this, Especialidad_act.class);
+        startActivity(i);
     }
 }

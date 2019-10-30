@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ControlEscolar</string>
+    <string name="title_activity_lista_plan_estudios">Lista_plan_estudios</string>
 </resources>
