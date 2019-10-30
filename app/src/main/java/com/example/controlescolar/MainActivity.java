@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     Button btnRegistrar;
+    Button btnVisualizar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnRegistrar = findViewById(R.id.btnRegistrar);
         btnRegistrar.setOnClickListener(registrar);
+
+        btnVisualizar=findViewById(R.id.btnVisualizar);
+        btnVisualizar.setOnClickListener(visualizar);
     }
 
     //EVENTOS PARA ABRIR OTRA ACTIVITY
@@ -23,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), RegistrarEstudiante.class);
+            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+    };
+
+    //evento estudiantes
+    View.OnClickListener visualizar = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getApplicationContext(), VisualizarEstudiante.class);
             intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
