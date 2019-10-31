@@ -141,7 +141,7 @@ public class FragmentCargarMaterias extends Fragment {
                                                                                 //Si es materia de 1er semestre se agrega a la lista
                                                                                 Materia materia = snapshot.getValue(Materia.class);
                                                                                 if (materia.getSemestre().equals("1")) {
-                                                                                    final String claveMateria = snapshot.getKey();
+                                                                                    final String claveMateria = materia.getClave();
                                                                                     final String nombreMateria = materia.getNombre();
                                                                                     final String semestreMateria = materia.getSemestre();
                                                                                     final String creditosMateria = materia.getCreditos();
@@ -153,7 +153,7 @@ public class FragmentCargarMaterias extends Fragment {
                                                                                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                                                                 String[] elementos = snapshot.getKey().split("%");
                                                                                                 //Si corresponde al periodo actual
-                                                                                                if (elementos[2].equals(claveMateria)) {
+                                                                                                if (elementos[3].equals(periodoActual)) {
                                                                                                     Grupo grupo = snapshot.getValue(Grupo.class);
                                                                                                     materias.add(new PojoMateria(claveMateria, nombreMateria, semestreMateria, creditosMateria, grupo.getHora()));
                                                                                                 }
@@ -272,6 +272,7 @@ public class FragmentCargarMaterias extends Fragment {
                                     }
                                     if(es_especialidad){
                                         listaMaterias.add(snapshot.getKey());
+                                        listaMaterias.add(materia.getClave());
                                         listaMaterias.add(materia.getNombre());
                                         listaMaterias.add(materia.getSemestre());
                                         listaMaterias.add(materia.getCreditos());
@@ -297,17 +298,17 @@ public class FragmentCargarMaterias extends Fragment {
                                             }
                                             //Si ya aprobó una materia, se elimina ésta del arreglo de listaMaterias
                                             for(int i=0; i<evaluacionesAlumno.size(); i++){
-                                                for(int k=0; k<listaMaterias.size(); k+=9){
+                                                for(int k=0; k<listaMaterias.size(); k+=10){
                                                     if(listaMaterias.get(k).equals(evaluacionesAlumno.get(i))){
                                                         listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k);
-                                                        listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k);
+                                                        listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k);
                                                         break;
                                                     }
                                                 }
                                             }
                                             //Si tiene materias con requisitos que NO están aprobados, se eliminan
-                                            for(int k=0; k<listaMaterias.size(); k+=9){
-                                                for(int x=4; x<9; x++) {
+                                            for(int k=0; k<listaMaterias.size(); k+=10){
+                                                for(int x=5; x<10; x++) {
                                                     Log.d("", ""+(k+x));
                                                     if (listaMaterias.get(k+x) != null) {
                                                         //Si tiene un requisito, se busca que se haya aprobado
@@ -321,7 +322,7 @@ public class FragmentCargarMaterias extends Fragment {
                                                         }
                                                         //Si no la ha pasado, se elimina
                                                         if (!aprobada) {
-                                                            listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k);
+                                                            listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k);
                                                             listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k);
                                                             listaMaterias.remove(k); listaMaterias.remove(k); listaMaterias.remove(k);
                                                         }
@@ -336,9 +337,9 @@ public class FragmentCargarMaterias extends Fragment {
                                                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                         Grupo grupo = snapshot.getValue(Grupo.class);
                                                         //Recorremos cada materia para enlistarla
-                                                        for(int i=0; i<listaMaterias.size(); i+=9){
+                                                        for(int i=0; i<listaMaterias.size(); i+=10){
                                                             if(listaMaterias.get(i).equals(grupo.getMateria())) {
-                                                                materias.add(new PojoMateria(listaMaterias.get(i), listaMaterias.get(i + 1), listaMaterias.get(i + 2), listaMaterias.get(i + 3), grupo.getHora()));
+                                                                materias.add(new PojoMateria(listaMaterias.get(i+1), listaMaterias.get(i + 2), listaMaterias.get(i + 3), listaMaterias.get(i + 4), grupo.getHora()));
                                                                 break;
                                                             }
                                                         }

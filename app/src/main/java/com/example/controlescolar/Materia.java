@@ -1,12 +1,13 @@
 package com.example.controlescolar;
 
 public class Materia {
-    String creditos, especialidad, horasClase, horasPracticas, horasTeoricas, nombre, plan, requerimiento1, requerimiento2, requerimiento3, requerimiento4, requerimiento5, semestre;
+    String clave, creditos, especialidad, horasClase, horasPracticas, horasTeoricas, nombre, plan, requerimiento1, requerimiento2, requerimiento3, requerimiento4, requerimiento5, semestre;
 
     public Materia() {
     }
 
-    public Materia(String creditos, String especialidad, String horasClase, String horasPracticas, String horasTeoricas, String nombre, String plan, String requerimiento1, String requerimiento2, String requerimiento3, String requerimiento4, String requerimiento5, String semestre) {
+    public Materia(String clave, String creditos, String especialidad, String horasClase, String horasPracticas, String horasTeoricas, String nombre, String plan, String requerimiento1, String requerimiento2, String requerimiento3, String requerimiento4, String requerimiento5, String semestre) {
+        this.clave = clave;
         this.creditos = creditos;
         this.especialidad = especialidad;
         this.horasClase = horasClase;
@@ -20,6 +21,14 @@ public class Materia {
         this.requerimiento4 = requerimiento4;
         this.requerimiento5 = requerimiento5;
         this.semestre = semestre;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     public String getCreditos() {
