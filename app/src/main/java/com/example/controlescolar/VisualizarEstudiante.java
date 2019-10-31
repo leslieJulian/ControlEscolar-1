@@ -1,9 +1,5 @@
 package com.example.controlescolar;
 
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class VisualizarEstudiante extends AppCompatActivity {
 
@@ -71,7 +70,6 @@ public class VisualizarEstudiante extends AppCompatActivity {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             //Obteniendo el objeto y recuperando el nombre y clave de cada plan
                             PlanEstudio planEstudio = snapshot.getValue(PlanEstudio.class);
-
                             arregloClavesPlanes.add(snapshot.getKey());
                             arregloPlanes.add(planEstudio.getNombre());
                         }
@@ -236,4 +234,3 @@ public class VisualizarEstudiante extends AppCompatActivity {
         }
     };
 }
-

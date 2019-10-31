@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnRegistrar;
-    Button btnVisualizar;
+
+    Button btnRegistrar, btnVisualizar, btnMaterias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +17,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnRegistrar = findViewById(R.id.btnRegistrar);
         btnRegistrar.setOnClickListener(registrar);
-
-        btnVisualizar=findViewById(R.id.btnVisualizar);
+        btnVisualizar = findViewById(R.id.btnVisualizar);
         btnVisualizar.setOnClickListener(visualizar);
+        btnMaterias = findViewById(R.id.btnCargarMaterias);
+        btnMaterias.setOnClickListener(irMaterias);
     }
 
     //EVENTOS PARA ABRIR OTRA ACTIVITY
@@ -31,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
-
-    //evento estudiantes
     View.OnClickListener visualizar = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -41,4 +40,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
+    View.OnClickListener irMaterias = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getApplicationContext(), ActivityMaterias.class);
+            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+    };
+
 }

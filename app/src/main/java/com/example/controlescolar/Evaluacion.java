@@ -1,23 +1,16 @@
 package com.example.controlescolar;
 
 public class Evaluacion {
-    String id, calificacion, tipo;
+    String calificacion, periodo, semestre, tipo;
 
     public Evaluacion() {
     }
 
-    public Evaluacion(String id, String calificacion, String tipo) {
-        this.id = id;
+    public Evaluacion(String calificacion, String periodo, String semestre, String tipo) {
         this.calificacion = calificacion;
+        this.periodo = periodo;
+        this.semestre = semestre;
         this.tipo = tipo;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getCalificacion() {
@@ -26,6 +19,22 @@ public class Evaluacion {
 
     public void setCalificacion(String calificacion) {
         this.calificacion = calificacion;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 
     public String getTipo() {
