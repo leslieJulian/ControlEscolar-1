@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ControlEscolar</string>
+    <string-array name="cabecera_tabla">
+        <item>Hora</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sabado</item>
+    </string-array>
 </resources>

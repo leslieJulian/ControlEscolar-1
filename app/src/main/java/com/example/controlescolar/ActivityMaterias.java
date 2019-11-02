@@ -16,7 +16,7 @@ public class ActivityMaterias extends AppCompatActivity {
         setContentView(R.layout.activity_materias);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
-        FragmentPagerAdapter adaptadorVP = new FragmentPagerAdapterEstudiantes(this, getSupportFragmentManager());
+        FragmentPagerAdapter adaptadorVP = new FragmentPagerAdapterEstudiantes(this, getSupportFragmentManager(), this);
         viewPager.setAdapter(adaptadorVP);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);

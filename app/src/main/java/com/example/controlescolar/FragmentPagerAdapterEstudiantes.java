@@ -1,5 +1,6 @@
 package com.example.controlescolar;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
@@ -8,10 +9,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class FragmentPagerAdapterEstudiantes extends FragmentPagerAdapter {
     public Context contexto;
+    Activity activity;
 
-    public FragmentPagerAdapterEstudiantes(Context ctx, FragmentManager fm) {
+    public FragmentPagerAdapterEstudiantes(Context ctx, FragmentManager fm, Activity act) {
         super(fm);
         contexto = ctx;
+        activity = act;
     }
 
     @Override
@@ -19,7 +22,7 @@ public class FragmentPagerAdapterEstudiantes extends FragmentPagerAdapter {
         if(posicion == 0){
             return new FragmentCargarMaterias();
         }else if(posicion == 1){
-            return new FragmentHorario();
+            return new FragmentHorario(activity);
         }else{
             return null;
         }

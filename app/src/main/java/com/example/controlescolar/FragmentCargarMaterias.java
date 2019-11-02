@@ -24,12 +24,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class FragmentCargarMaterias extends Fragment {
     View v;
-    RecyclerView rvMaterias;
+    static RecyclerView rvMaterias;
     SwipeRefreshLayout srCargarMaterias;
-    ArrayList<PojoMateria> materias;
+    public static ArrayList<PojoMateria> materias;
     ArrayList<String> listaMaterias;
     ArrayList<String> evaluacionesAlumno;
-    String periodoActual, periodoRegistro, plan, especialidad, semestre = "";
+    String periodoRegistro, especialidad, semestre = "";
+    public static String periodoActual, numControlString = "", plan;
     EditText numControl;
 
     public FragmentCargarMaterias(){
@@ -96,7 +97,10 @@ public class FragmentCargarMaterias extends Fragment {
 
     public void inicializarDatos(){
         materias.clear();
+        FragmentHorario.claves.clear();
+        FragmentHorario.limpiarCampos();
         numControl = v.findViewById(R.id.numeroControl);
+        numControlString = numControl.getText().toString();
         //Validamos num de control
         if(!numControl.getText().toString().equals("")){
             //Verificamos que el alumno existe
@@ -155,7 +159,7 @@ public class FragmentCargarMaterias extends Fragment {
                                                                                                 //Si corresponde al periodo actual
                                                                                                 if (elementos[3].equals(periodoActual)) {
                                                                                                     Grupo grupo = snapshot.getValue(Grupo.class);
-                                                                                                    materias.add(new PojoMateria(claveMateria, nombreMateria, semestreMateria, creditosMateria, grupo.getHora()));
+                                                                                                    materias.add(new PojoMateria(claveMateria, nombreMateria, semestreMateria, creditosMateria, grupo.getHora(), grupo.getAula(), grupo.getNombre()));
                                                                                                 }
                                                                                             }
                                                                                             rvMaterias.getAdapter().notifyDataSetChanged();
@@ -211,7 +215,7 @@ public class FragmentCargarMaterias extends Fragment {
                                                         cargarMaterias();
                                                     }
                                                 }else{
-                                                    semestre = "Asignado";
+                                                    FragmentHorario.cargarHorario();
                                                     Toast.makeText(getActivity(), "El estudiante ya tiene asignadas sus materias", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
@@ -339,7 +343,7 @@ public class FragmentCargarMaterias extends Fragment {
                                                         //Recorremos cada materia para enlistarla
                                                         for(int i=0; i<listaMaterias.size(); i+=10){
                                                             if(listaMaterias.get(i).equals(grupo.getMateria())) {
-                                                                materias.add(new PojoMateria(listaMaterias.get(i+1), listaMaterias.get(i + 2), listaMaterias.get(i + 3), listaMaterias.get(i + 4), grupo.getHora()));
+                                                                materias.add(new PojoMateria(listaMaterias.get(i+1), listaMaterias.get(i + 2), listaMaterias.get(i + 3), listaMaterias.get(i + 4), grupo.getHora(), grupo.getAula(), grupo.getNombre()));
                                                                 break;
                                                             }
                                                         }

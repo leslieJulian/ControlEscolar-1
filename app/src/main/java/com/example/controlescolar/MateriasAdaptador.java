@@ -1,10 +1,13 @@
 package com.example.controlescolar;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,14 +30,47 @@ public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.Ma
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MateriasAdaptador.MateriasViewHolder holder, int position) {
-        PojoMateria materia = materias.get(position);
+    public void onBindViewHolder(@NonNull final MateriasAdaptador.MateriasViewHolder holder, int position) {
+        final PojoMateria materia = materias.get(position);
         holder.nombre.setText(materia.getNombre());
         holder.semestre.setText("Semestre: "+materia.getSemestre());
         holder.creditos.setText("Créditos: "+materia.getCreditos());
         holder.clave.setText(materia.getClave());
         holder.hora.setText("Hora: "+materia.getHora());
         holder.seleccion.setChecked(false);
+        holder.seleccion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    boolean traslape = false;
+                    //Se verifica si hay traslapes de hora
+                    for(int i=0; i<FragmentHorario.claves.size(); i+=2){
+                        //Si ya existe una materia en esa hora o si es la misma materia
+                        if((FragmentHorario.claves.get(i+1).equals(materia.getHora()))||(FragmentHorario.claves.get(i).equals(materia.getClave()))){
+                            traslape = true;
+                            break;
+                        }
+                    }
+                    if(!traslape){
+                        //Si es marcada se agrega al horario
+                        FragmentHorario.claves.add(holder.clave.getText().toString());
+                        FragmentHorario.claves.add(materia.getHora());
+                    }else{
+                        holder.seleccion.setChecked(false);
+                    }
+                }else{
+                    //Si es deseleccionada la materia se quita del arreglo
+                    for(int i=0; i<FragmentHorario.claves.size(); i+=2){
+                        if(FragmentHorario.claves.get(i).equals(materia.getClave())){
+                            FragmentHorario.claves.remove(i);
+                            FragmentHorario.claves.remove(i);
+                            break;
+                        }
+                    }
+                }
+                FragmentHorario.cargarHorario();
+            }
+        });
     }
 
     @Override
