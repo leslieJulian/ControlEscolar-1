@@ -249,7 +249,7 @@ public class FragmentHorario extends Fragment {
                                                                                                     Materia materia = snapshot.getValue(Materia.class);
                                                                                                     for(int i=0; i<materiasCargadas.size(); i+= 5){
                                                                                                         if(materiasCargadas.get(i+1).equals(snapshot.getKey())){
-                                                                                                            materiasCargadas.set(i+1, materia.getNombre());
+                                                                                                            materiasCargadas.set(i+1, materia.getNombreCorto());
                                                                                                             materiasCargadas.set(i+3, materia.getCreditos());
                                                                                                         }
                                                                                                     }
