@@ -1,14 +1,15 @@
 package com.example.controlescolar;
 
 public class Especialidad {
-    String nombre, plan;
+    String nombre, plan, estado;
 
     public Especialidad() {
     }
 
-    public Especialidad(String nombre, String plan) {
+    public Especialidad(String nombre, String plan, String estado) {
         this.nombre = nombre;
         this.plan = plan;
+        this.estado = estado;
     }
 
     public String getNombre() {
@@ -25,5 +26,13 @@ public class Especialidad {
 
     public void setPlan(String plan) {
         this.plan = plan;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

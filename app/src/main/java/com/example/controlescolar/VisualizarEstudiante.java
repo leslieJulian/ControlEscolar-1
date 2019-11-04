@@ -100,10 +100,12 @@ public class VisualizarEstudiante extends AppCompatActivity {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 //Obteniendo el objeto y recuperando el nombre y clave de cada plan
                                 Especialidad especialidad = snapshot.getValue(Especialidad.class);
-                                //Si la especialidad es correspondiente al plan seleccionado
-                                if(arregloClavesPlanes.get(spinnerPlanesEstudio.getSelectedItemPosition()).equals(especialidad.getPlan())) {
-                                    arrayClavesEspecialidades.add(snapshot.getKey());
-                                    arrayEspecialidades.add(especialidad.getNombre());
+                                if(especialidad.getEstado().equals("true")) {
+                                    //Si la especialidad es correspondiente al plan seleccionado
+                                    if (arregloClavesPlanes.get(spinnerPlanesEstudio.getSelectedItemPosition()).equals(especialidad.getPlan())) {
+                                        arrayClavesEspecialidades.add(snapshot.getKey());
+                                        arrayEspecialidades.add(especialidad.getNombre());
+                                    }
                                 }
                             }
                             //Inicializando y agregando el adaptador al spinner

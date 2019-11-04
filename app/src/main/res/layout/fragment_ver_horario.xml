@@ -26,13 +26,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Horario"
-                        android:textSize="20sp"></TextView>
-
                     <TableLayout
                         android:id="@+id/tablaHorario"
                         android:layout_width="match_parent"

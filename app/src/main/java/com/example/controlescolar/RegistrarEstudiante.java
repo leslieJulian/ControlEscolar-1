@@ -91,10 +91,13 @@ public class RegistrarEstudiante extends AppCompatActivity {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 //Obteniendo el objeto y recuperando el nombre y clave de cada plan
                                 Especialidad especialidad = snapshot.getValue(Especialidad.class);
-                                //Si la especialidad es correspondiente al plan seleccionado
-                                if(arregloClavesPlanes.get(spinnerPlanesEstudio.getSelectedItemPosition()).equals(especialidad.getPlan())) {
-                                    arregloClavesEspecialidades.add(snapshot.getKey());
-                                    arregloEspecialidades.add(especialidad.getNombre());
+                                //Si la especialidad esta activa
+                                if(especialidad.getEstado().equals("true")) {
+                                    //Si la especialidad es correspondiente al plan seleccionado
+                                    if (arregloClavesPlanes.get(spinnerPlanesEstudio.getSelectedItemPosition()).equals(especialidad.getPlan())) {
+                                        arregloClavesEspecialidades.add(snapshot.getKey());
+                                        arregloEspecialidades.add(especialidad.getNombre());
+                                    }
                                 }
                             }
                             adaptadorEspecialidades = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arregloEspecialidades);
