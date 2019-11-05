@@ -1,5 +1,6 @@
 package com.example.controlescolar;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,18 +24,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class FragmentCargarMaterias extends Fragment {
-    View v;
+    View v; Activity actividad;
     static RecyclerView rvMaterias;
     SwipeRefreshLayout srCargarMaterias;
     public static ArrayList<PojoMateria> materias;
     ArrayList<String> listaMaterias;
+    public static ArrayList<String> coloresFondo;
     ArrayList<String> evaluacionesAlumno;
     String periodoRegistro, especialidad, semestre = "";
     public static String periodoActual, numControlString = "", plan;
     EditText numControl;
 
     public FragmentCargarMaterias(){
-
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class FragmentCargarMaterias extends Fragment {
 
     public View onCreateView( LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_cargar_materias, container, false);
+        actividad = this.getActivity();
 
         //Obtenidneo los datos necesarios
         getPeriodoActual();
@@ -57,7 +59,7 @@ public class FragmentCargarMaterias extends Fragment {
             @Override
             public void onClick(View view) {
                 inicializarDatos();
-                MateriasAdaptador adaptador = new MateriasAdaptador(materias);
+                MateriasAdaptador adaptador = new MateriasAdaptador(materias, actividad);
                 rvMaterias.setAdapter(adaptador);
             }
         });
@@ -97,6 +99,7 @@ public class FragmentCargarMaterias extends Fragment {
 
     public void inicializarDatos(){
         materias.clear();
+        rellenarColores();
         FragmentHorario.claves.clear();
         FragmentHorario.limpiarCampos();
         numControl = v.findViewById(R.id.numeroControl);
@@ -159,7 +162,7 @@ public class FragmentCargarMaterias extends Fragment {
                                                                                                 //Si corresponde al periodo actual
                                                                                                 if (elementos[3].equals(periodoActual)) {
                                                                                                     Grupo grupo = snapshot.getValue(Grupo.class);
-                                                                                                    materias.add(new PojoMateria(claveMateria, nombreMateria, semestreMateria, creditosMateria, grupo.getHora(), grupo.getAula(), grupo.getNombre()));
+                                                                                                    materias.add(new PojoMateria(claveMateria, nombreMateria, semestreMateria, creditosMateria, grupo.getHora(), grupo.getAula(), grupo.getNombre(), "#ffffff"));
                                                                                                 }
                                                                                             }
                                                                                             rvMaterias.getAdapter().notifyDataSetChanged();
@@ -343,7 +346,7 @@ public class FragmentCargarMaterias extends Fragment {
                                                         //Recorremos cada materia para enlistarla
                                                         for(int i=0; i<listaMaterias.size(); i+=10){
                                                             if(listaMaterias.get(i).equals(grupo.getMateria())) {
-                                                                materias.add(new PojoMateria(listaMaterias.get(i+1), listaMaterias.get(i + 2), listaMaterias.get(i + 3), listaMaterias.get(i + 4), grupo.getHora(), grupo.getAula(), grupo.getNombre()));
+                                                                materias.add(new PojoMateria(listaMaterias.get(i+1), listaMaterias.get(i + 2), listaMaterias.get(i + 3), listaMaterias.get(i + 4), grupo.getHora(), grupo.getAula(), grupo.getNombre(), "#ffffff"));
                                                                 break;
                                                             }
                                                         }
@@ -371,6 +374,16 @@ public class FragmentCargarMaterias extends Fragment {
                         }
                     });
 
+        }else{
+            //Asignamos colores distintivos a cada card
         }
+    }
+
+    public void rellenarColores(){
+        coloresFondo = new ArrayList<String>();
+        coloresFondo.add("#ffadad"); coloresFondo.add("#c6ffad"); coloresFondo.add("#d7adff");
+        coloresFondo.add("#ffdcad"); coloresFondo.add("#adffd7"); coloresFondo.add("ffadfb");
+        coloresFondo.add("#feffad"); coloresFondo.add("#adc8ff"); coloresFondo.add("#ffadb8");
+        coloresFondo.add("#c5c5c5");
     }
 }

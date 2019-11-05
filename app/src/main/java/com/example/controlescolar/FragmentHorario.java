@@ -72,7 +72,7 @@ public class FragmentHorario extends Fragment {
                                                 for(int i=0; i<claves.size(); i+=2){
                                                     for(int k=0; k<FragmentCargarMaterias.materias.size(); k++){
                                                         //Obteniendo los datos
-                                                        if(claves.get(i).equals(FragmentCargarMaterias.materias.get(k).getClave())){
+                                                        if((claves.get(i).equals(FragmentCargarMaterias.materias.get(k).getClave()))&&(claves.get(i+1).equals(FragmentCargarMaterias.materias.get(k).getHora()))){
                                                             //Según su horario
                                                             String clase = FragmentCargarMaterias.materias.get(k).getNombre()+", \nAula: "+FragmentCargarMaterias.materias.get(k).getAula();
                                                             switch(FragmentCargarMaterias.materias.get(k).getHora()){

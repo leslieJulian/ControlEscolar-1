@@ -1,12 +1,12 @@
 package com.example.controlescolar;
 
 public class PojoMateria {
-    String clave, nombre, semestre, creditos, hora, aula, grupo;
+    String clave, nombre, semestre, creditos, hora, aula, grupo, color;
 
     public PojoMateria() {
     }
 
-    public PojoMateria(String clave, String nombre, String semestre, String creditos, String hora, String aula, String grupo) {
+    public PojoMateria(String clave, String nombre, String semestre, String creditos, String hora, String aula, String grupo, String color) {
         this.clave = clave;
         this.nombre = nombre;
         this.semestre = semestre;
@@ -14,6 +14,7 @@ public class PojoMateria {
         this.hora = hora;
         this.aula = aula;
         this.grupo = grupo;
+        this.color = color;
     }
 
     public String getClave() {
@@ -70,5 +71,13 @@ public class PojoMateria {
 
     public void setGrupo(String grupo) {
         this.grupo = grupo;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
