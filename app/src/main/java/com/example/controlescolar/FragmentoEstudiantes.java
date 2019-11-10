@@ -21,8 +21,12 @@ public class FragmentoEstudiantes extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_estudiantes, container, false);
+        View v = inflater.inflate(R.layout.activity_visualizar_estudiante, container, false);
+
 
         return v;
     }
+
+
+
 }

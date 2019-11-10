@@ -14,7 +14,7 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightPrimaryColor">
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/claveMateria"
