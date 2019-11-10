@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tecnologico"
+        android:icon="@drawable/ic_tecnologico"
+        android:title="Tecnologico"/>
+
+    <item
+        android:id="@+id/empleados"
+        android:icon="@drawable/ic_empleados"
+        android:title="Empleados"/>
+
+
+    <item
+        android:id="@+id/materias"
+        android:icon="@drawable/ic_materias"
+        android:title="Materias"/>
+
+    <item
+        android:id="@+id/grupos"
+        android:icon="@drawable/ic_grupos"
+        android:title="Grupos"/>
+
+    <item
+        android:id="@+id/estudiantes"
+        android:icon="@drawable/ic_estudiantes"
+        android:title="Estudiantes"/>
+
+
+</menu>
