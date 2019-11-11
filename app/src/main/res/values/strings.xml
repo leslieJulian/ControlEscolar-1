@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ControlEscolar</string>
     <string name="title_activity_lista_plan_estudios">Lista_plan_estudios</string>
+    <string name="title_activity_lista_especialidades_act">Lista_especialidades_act</string>
 </resources>

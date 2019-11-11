@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Especialidad_act">
+    tools:context=".Editar_plan_act">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,30 +12,27 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
+
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registro de Especialidad" />
+            android:text="Editar de Planes de Estudio" />
 
-        <Spinner
-            android:id="@+id/sppiner_clave_plan"
+        <TextView
+            android:id="@+id/tv_claveUnoEditarr"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></Spinner>
+            android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/tv_nombre_especialidad"
+            android:id="@+id/tv_nombre_planEditarr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Nombre de la especialidad" />
+            android:hint="Nombre del plan"
+            android:inputType="textPersonName" />
 
-        <Switch
-            android:id="@+id/switch2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Estado de la especialidad" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,17 +43,14 @@
                 android:id="@+id/btn_cancelar"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Registar"></Button>
+                android:text="Cancelar"></Button>
 
             <Button
-                android:id="@+id/btn_registrar_especialidad"
+                android:id="@+id/btn_registar"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:onClick="guardarEspecialidad"
-                android:text="Registar"></Button>
-
-
+                android:onClick="guardarEdicion"
+                android:text="Registrar"></Button>
         </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

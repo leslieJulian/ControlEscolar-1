@@ -1,6 +1,8 @@
 package com.example.controlescolar.POJO;
 
-public class PlanE {
+import java.io.Serializable;
+
+public class PlanE implements Serializable {
 
     private String nombre;
 

@@ -2,6 +2,7 @@ package com.example.controlescolar;
 
 import android.os.Bundle;
 
+import com.example.controlescolar.POJO.EspecialidadE;
 import com.example.controlescolar.POJO.PlanE;
 import com.example.controlescolar.RecyclerView.EspecialidadesAdaptador;
 import com.example.controlescolar.RecyclerView.PlanesAdaptador;
@@ -21,22 +22,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Lista_plan_estudios extends AppCompatActivity {
-    private ArrayList<PlanE> lista_planes;
-    private ArrayList<String> listaKeys;
+public class Lista_especialidades_act extends AppCompatActivity {
+    private ArrayList<EspecialidadE> lista_especialidades;
     private DatabaseReference databaseReference;
+    private ArrayList<String> lista_keys;
 
     private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_plan_estudios);
+        setContentView(R.layout.activity_lista_especialidades_act);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,37 +45,34 @@ public class Lista_plan_estudios extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
         inicialrComponentes();
 
 
     }
 
     public void iniciarAdaptador() {
-
-        PlanesAdaptador adaptador = new PlanesAdaptador(lista_planes, Lista_plan_estudios.this, listaKeys);
+        EspecialidadesAdaptador adaptador = new EspecialidadesAdaptador(lista_especialidades, Lista_especialidades_act.this,lista_keys);
         recyclerView.setAdapter(adaptador);
 
     }
 
     public void iniciarLista() {
-        databaseReference.child("planesdeestudio").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("especialidades").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                lista_planes.clear();
-                listaKeys.clear();
+                lista_especialidades.clear();
+                lista_keys.clear();
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    PlanE c = d.getValue(PlanE.class);
-                    lista_planes.add(c);
-                    listaKeys.add(d.getKey().toString());
+                    EspecialidadE c = d.getValue(EspecialidadE.class);
+                    lista_especialidades.add(c);
+                    lista_keys.add(d.getKey());
                 }
                 iniciarAdaptador();
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Snackbar.make(Lista_plan_estudios.this.getCurrentFocus(), "Error al cargar la base de datos: " + databaseError.toException(), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(Lista_especialidades_act.this.getCurrentFocus(), "Error al cargar la base de datos: " + databaseError.toException(), Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -85,15 +81,16 @@ public class Lista_plan_estudios extends AppCompatActivity {
 
 
     public void inicialrComponentes() {
-        FirebaseApp.initializeApp(Lista_plan_estudios.this);
+        FirebaseApp.initializeApp(Lista_especialidades_act.this);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        recyclerView = (RecyclerView) findViewById(R.id.miRecicleyView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Lista_plan_estudios.this);
+        recyclerView = (RecyclerView) findViewById(R.id.miRecicleyViewEspecialidades);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Lista_especialidades_act.this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        lista_planes = new ArrayList<>();
-        listaKeys = new ArrayList<>();
+        lista_especialidades = new ArrayList<>();
+        lista_keys = new ArrayList<>();
         iniciarLista();
     }
+
 
 }

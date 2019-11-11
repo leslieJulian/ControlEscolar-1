@@ -1,14 +1,14 @@
 package com.example.controlescolar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.controlescolar.POJO.PlanE;
 import com.google.android.material.snackbar.Snackbar;
@@ -18,39 +18,31 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Plan_de_estudios extends AppCompatActivity {
-    private EditText clavePlan_uno, nombre_plan;
-    private EditText clavePlan_tres1;
+public class Editar_plan_act extends AppCompatActivity {
+    private TextView clave_plan;
+    private EditText nombre_plan;
+    private String nombrePlan;
+    private String keyPlan;
     private DatabaseReference mDatabase;
-  //  private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plan_de_estudios);
-        initVariables();
+        setContentView(R.layout.activity_editar_plan_act);
+        inicarComponentes();
+        llenarCamposAEditar();
+        Toast.makeText(this, keyPlan, Toast.LENGTH_LONG).show();
 
     }
 
-
-    public void guardarPlan(final View view) {
-        if (validarCamposVacios()) {
-            final PlanE p = new PlanE();
-           final String clave = clavePlan_uno.getText().toString();
-
-            p.setNombre(nombre_plan.getText().toString());
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setView(R.layout.progressbar_general);
-            final Dialog dialog = builder.create();
-            dialog.show();
-
+    public void guardarEdicion(final View view) {
+        if (validarCampos()) {
+            final PlanE planEdicion = new PlanE();
+            planEdicion.setNombre(nombre_plan.getText().toString());
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    mDatabase.child("planesdeestudio").child(clave).setValue(p);
-                    dialog.dismiss();
-                    limpiarCampos();
+                    mDatabase.child("planesdeestudio").child(keyPlan).setValue(planEdicion);
                     InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     im.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     Snackbar.make(getCurrentFocus(), "Exito!!", Snackbar.LENGTH_SHORT).show();
@@ -58,36 +50,31 @@ public class Plan_de_estudios extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    dialog.dismiss();
+
                     Snackbar.make(getCurrentFocus(), "Ha ocurrido un error\nIntentelo mas tarde", Snackbar.LENGTH_SHORT).show();
                 }
             });
-
         }
     }
 
-    public Boolean validarCamposVacios() {
-        if (clavePlan_uno.getText().toString().isEmpty()) {
-            clavePlan_uno.setError("Requerido");
-            return false;
-        }
-
-        if (nombre_plan.getText().toString().isEmpty()) {
-            nombre_plan.setError("Requerido");
-            return false;
-        }
-
-        return true;
-    }
-
-    public void initVariables() {
-        clavePlan_uno = findViewById(R.id.tv_claveUno);
-        nombre_plan = findViewById(R.id.tv_nombre_plan);
+    public void inicarComponentes() {
+        nombrePlan = getIntent().getExtras().getString("nplan");
+        keyPlan = getIntent().getExtras().getString("keyplan");
+        clave_plan = findViewById(R.id.tv_claveUnoEditarr);
+        nombre_plan = findViewById(R.id.tv_nombre_planEditarr);
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void limpiarCampos() {
-        clavePlan_uno.setText(null);
-        nombre_plan.setText(null);
+    public void llenarCamposAEditar() {
+        clave_plan.setText(keyPlan);
+        nombre_plan.setText(nombrePlan);
+    }
+
+    public boolean validarCampos() {
+        if (nombre_plan.getText().toString().isEmpty() || nombre_plan.getText().toString() == null) {
+            nombre_plan.setError("Requerido");
+            return false;
+        }
+        return true;
     }
 }

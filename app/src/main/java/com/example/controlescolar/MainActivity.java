@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void abrirRegistarPlanes(View view) {
         //Intent i = new Intent(this, Plan_de_estudios.class);
-        Intent i = new Intent(this, Especialidad_act.class);
+        Intent i = new Intent(this, Lista_plan_estudios.class);
         startActivity(i);
     }
 }

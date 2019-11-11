@@ -1,32 +1,47 @@
 package com.example.controlescolar.POJO;
 
-public class EspecialidadE {
-    private String nombre_especialidad;
-    private String nombre_plan_estudios;
+import java.io.Serializable;
+
+public class EspecialidadE implements Serializable {
+    private String nombre;
+    private String plan;
+    private String estado;
+
 
     public EspecialidadE() {
 
     }
 
-    public EspecialidadE(String nombre_especialidad, String nombre_plan_estudios) {
-        this.nombre_especialidad = nombre_especialidad;
-        this.nombre_plan_estudios = nombre_plan_estudios;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getNombre_especialidad() {
-        return nombre_especialidad;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setNombre_especialidad(String nombre_especialidad) {
-        this.nombre_especialidad = nombre_especialidad;
+    public String getPlan() {
+        return plan;
     }
 
-    public String getNombre_plan_estudios() {
-        return nombre_plan_estudios;
+    public void setPlan(String plan) {
+        this.plan = plan;
     }
 
-    public void setNombre_plan_estudios(String nombre_plan_estudios) {
-        this.nombre_plan_estudios = nombre_plan_estudios;
+    public String getEstado() {
+        return estado;
     }
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "EspecialidadE{" +
+                "nombre='" + nombre + '\'' +
+                ", plan='" + plan + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }
