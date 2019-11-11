@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "173250700267-cocpu93r2tu30n9u45dmufb634af559j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.controlescolar",
+            "certificate_hash": "63f6852fab1c230a4168ddde3d60711c0fcedeed"
+          }
+        },
+        {
           "client_id": "173250700267-f7aag721ddl2on7g6120tjg74ml7lcdh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
