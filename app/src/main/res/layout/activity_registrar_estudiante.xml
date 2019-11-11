@@ -7,146 +7,137 @@
     tools:context=".RegistrarEstudiante">
 
     <!--NOMBRE-->
-    <TextView
-        android:id="@+id/tvNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre:"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30dp"/>
-
-    <EditText
-        android:id="@+id/etNombre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvNombre"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <!--PRIMER APELLIDO-->
-    <TextView
-        android:id="@+id/tvPrimerApellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Primer apellido:"
-        app:layout_constraintTop_toTopOf="@id/tvNombre"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30dp"/>
-
-    <EditText
-        android:id="@+id/etPrimerApellido"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvPrimerApellido"
-        app:layout_constraintTop_toBottomOf="@id/etNombre" />
 
     <!--SEGUNDO APELLIDO-->
-    <TextView
-        android:id="@+id/tvSegundoApellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Segundo apellido:"
-        app:layout_constraintTop_toTopOf="@id/tvPrimerApellido"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30dp"/>
-
-    <EditText
-        android:id="@+id/etSegundoApellido"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="30dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvSegundoApellido"
-        app:layout_constraintTop_toBottomOf="@id/etPrimerApellido" />
 
     <!--PLAN DE ESTUDIOS-->
-    <TextView
-        android:id="@+id/tvPlanEstudios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Plan de estudios:"
-        app:layout_constraintTop_toTopOf="@id/tvSegundoApellido"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30dp"/>
-
-    <Spinner
-        android:id="@+id/spinnerPlanEstudios"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvPlanEstudios"
-        app:layout_constraintTop_toBottomOf="@id/etSegundoApellido" />
 
     <!--ESPECIALIDAD-->
-    <TextView
-        android:id="@+id/tvEspecialidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Especialidad:"
-        app:layout_constraintTop_toTopOf="@id/tvPlanEstudios"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30dp"/>
-
-    <Spinner
-        android:id="@+id/spinnerEspecialidad"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvEspecialidad"
-        app:layout_constraintTop_toBottomOf="@id/spinnerPlanEstudios" />
 
     <!--BOTÓN GuARDAR-->
 
     <!--BOTÓN CANCELAR-->
 
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="370dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="28dp"
+        android:ems="10"
+        style="@style/estiloEntrada"
+        android:hint="Nombre: "
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etPrimerApellido"
+        android:layout_width="370dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        style="@style/estiloEntrada"
+        android:hint="Primer Apellido:"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNombre" />
+
+    <EditText
+        android:id="@+id/etSegundoApellido"
+        android:layout_width="370dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        style="@style/estiloEntrada"
+        android:hint="Segundo Apellido: "
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPrimerApellido" />
+
+    <TextView
+        android:id="@+id/tvPlanEstudios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="38dp"
+        android:text="Plan de estudios:"
+        android:textSize="18sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSegundoApellido" />
+
+    <Spinner
+        android:id="@+id/spinnerPlanEstudios"
+        android:layout_width="218dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toEndOf="@id/tvPlanEstudios"
+        app:layout_constraintTop_toBottomOf="@id/etSegundoApellido" />
+
+    <TextView
+        android:id="@+id/tvEspecialidad"
+        android:layout_width="127dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="70dp"
+        android:text="Especialidad:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvPlanEstudios" />
+
+    <Spinner
+        android:id="@+id/spinnerEspecialidad"
+        android:layout_width="224dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toEndOf="@id/tvEspecialidad"
+        app:layout_constraintTop_toBottomOf="@id/spinnerPlanEstudios" />
+
     <Button
-        style="@style/btnAgregar"
         android:id="@+id/btnGuardar"
-        android:layout_width="281dp"
+        style="@style/btnAgregar"
+        android:layout_width="375dp"
         android:layout_height="50dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="52dp"
         android:text="Guardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerEspecialidad" />
 
     <Button
-        style="@style/btnCancelar"
         android:id="@+id/btnCancelar"
-        android:layout_width="283dp"
-        android:layout_height="49dp"
+        style="@style/btnCancelar"
+        android:layout_width="315dp"
+        android:layout_height="45dp"
         android:layout_marginTop="44dp"
         android:text="Cancelar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnGuardar" />
+
+    <TextView
+        android:id="@+id/txt_titulo_registro"
+        style="@style/estilo_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Registro de Estudiante"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
