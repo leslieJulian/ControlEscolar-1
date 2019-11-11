@@ -250,7 +250,7 @@ public class DetalleMateria extends AppCompatActivity {
         if(camposVacios()){
             if(evaluar(creditosMat, 10,1)){
                 if (evaluar(hClase, 5, 1)) {
-                    if(evaluar(hTeoria, 5, 1)) {
+                    if(evaluar(hTeoria, 5, 0)) {
                         if (evaluar(hPractica, 5, 1)) {
                             if(evaluar(semestreMat, 9, 1)){
 
