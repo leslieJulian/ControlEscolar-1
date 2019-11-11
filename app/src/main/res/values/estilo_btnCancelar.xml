@@ -8,7 +8,7 @@
 
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:background">#FF0000</item>
+        <item name="android:background">#9B0000</item>
 
     </style>
 </resources>
