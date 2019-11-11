@@ -124,6 +124,7 @@
 
     <!--BOTÓN GuARDAR-->
     <Button
+        style="@style/btnAgregar"
         android:id="@+id/btnGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -135,6 +136,7 @@
 
     <!--BOTÓN CANCELAR-->
     <Button
+        style="@style/btnCancelar"
         android:id="@+id/btnCancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

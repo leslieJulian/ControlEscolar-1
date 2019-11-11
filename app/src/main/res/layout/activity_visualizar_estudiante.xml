@@ -23,6 +23,7 @@
 
     <!--BOTÓN BUSCAR-->
     <Button
+        style="@style/btnAgregar"
         android:id="@+id/btnBuscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -172,6 +173,7 @@
 
     <!--BOTÓN GUARDAR CAMBIOS-->
     <Button
+        style="@style/btnAgregar"
         android:id="@+id/btnGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -183,6 +185,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
     <!--BOTÓN GUARDAR CAMBIOS-->
     <Button
+        style="@style/btnCancelar"
         android:id="@+id/btnRegresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

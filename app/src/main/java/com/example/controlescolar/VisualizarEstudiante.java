@@ -2,7 +2,9 @@ package com.example.controlescolar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,8 +23,11 @@ import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-public class VisualizarEstudiante extends AppCompatActivity {
+public class VisualizarEstudiante extends Fragment {
 
     EditText numeroControl, nombre, primerapellido, segundoapellido;
     TextView periodo;
@@ -32,25 +37,41 @@ public class VisualizarEstudiante extends AppCompatActivity {
     Spinner spinnerPlanesEstudio, spinnerEspecialidades;
     String periodoRegistrado;
 
+    View v;
+
+    public VisualizarEstudiante(){
+
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visualizar_estudiante);
-        numeroControl = findViewById(R.id.etNumeroControl);
-        btnBuscar = findViewById(R.id.btnBuscar);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.activity_visualizar_estudiante, container, false);
+
+        //setContentView(R.layout.activity_visualizar_estudiante);
+        numeroControl = v.findViewById(R.id.etNumeroControl);
+        btnBuscar = v.findViewById(R.id.btnBuscar);
         btnBuscar.setOnClickListener(buscar);
-        btnRegresar = findViewById(R.id.btnRegresar);
+        btnRegresar = v.findViewById(R.id.btnRegresar);
         btnRegresar.setOnClickListener(regresar);
-        btnGuardar = findViewById(R.id.btnGuardar);
+        btnGuardar = v.findViewById(R.id.btnGuardar);
         btnGuardar.setOnClickListener(guardar);
-        spinnerEspecialidades = findViewById(R.id.spinnerEspecialidad);
-        spinnerPlanesEstudio = findViewById(R.id.spinnerPlanEstudios);
+        spinnerEspecialidades = v.findViewById(R.id.spinnerEspecialidad);
+        spinnerPlanesEstudio = v.findViewById(R.id.spinnerPlanEstudios);
         spinnerPlanesEstudio.setOnItemSelectedListener(getEspecialidades);
-        nombre = findViewById(R.id.etNombre);
-        primerapellido = findViewById(R.id.etPrimerApellido);
-        segundoapellido = findViewById(R.id.etSegundoApellido);
-        periodo = findViewById(R.id.tvPeriodo);
+        nombre = v.findViewById(R.id.etNombre);
+        primerapellido = v.findViewById(R.id.etPrimerApellido);
+        segundoapellido = v.findViewById(R.id.etSegundoApellido);
+        periodo = v.findViewById(R.id.tvPeriodo);
         getPlanesEstudio();
+
+        return v;
     }
 
     //Métodos de recuperación de datos en FireBase
@@ -59,7 +80,7 @@ public class VisualizarEstudiante extends AppCompatActivity {
         arregloPlanes = new ArrayList<>();
         arregloClavesPlanes = new ArrayList<>();
         //Inicializando y agregando el adaptador al spinner
-        adaptadorPlanes = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arregloPlanes);
+        adaptadorPlanes = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arregloPlanes);
         spinnerPlanesEstudio.setAdapter(adaptadorPlanes);
         //Obteniendo la referencia al nodo de planesdeestudio
         FirebaseDatabase.getInstance().getReference().child("planesdeestudio")
@@ -79,7 +100,7 @@ public class VisualizarEstudiante extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         // Getting Post failed, log a message
-                        Toast.makeText(getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -109,7 +130,7 @@ public class VisualizarEstudiante extends AppCompatActivity {
                                 }
                             }
                             //Inicializando y agregando el adaptador al spinner
-                            adaptadorEspecialidades = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayEspecialidades);
+                            adaptadorEspecialidades = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, arrayEspecialidades);
                             spinnerEspecialidades.setAdapter(adaptadorEspecialidades);
                             adaptadorEspecialidades.notifyDataSetChanged();
                         }
@@ -117,7 +138,7 @@ public class VisualizarEstudiante extends AppCompatActivity {
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                             // Getting Post failed, log a message
-                            Toast.makeText(getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -164,7 +185,7 @@ public class VisualizarEstudiante extends AppCompatActivity {
                                 }
                             }else{
                                 nombre.setText("");
-                                Toast.makeText(getApplicationContext(), "No existe este número de control", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "No existe este número de control", Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -179,10 +200,12 @@ public class VisualizarEstudiante extends AppCompatActivity {
     View.OnClickListener regresar = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //Regresamos al menu principal olvidandonos del historial de activities en la app
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            Fragment este = null;
+            este = new FragmentoEstudiantes();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.container, este).commit();
         }
     };
 
@@ -190,9 +213,9 @@ public class VisualizarEstudiante extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             //Obteniendo los datos a registrar
-            EditText nombre = findViewById(R.id.etNombre);
-            EditText primerapellido = findViewById(R.id.etPrimerApellido);
-            EditText segundoapellido = findViewById(R.id.etSegundoApellido);
+            EditText nombre = v.findViewById(R.id.etNombre);
+            EditText primerapellido = v.findViewById(R.id.etPrimerApellido);
+            EditText segundoapellido = v.findViewById(R.id.etSegundoApellido);
             //Validando
             if(!nombre.getText().toString().equals("")){
                 //Comparando valor con regex
@@ -210,28 +233,33 @@ public class VisualizarEstudiante extends AppCompatActivity {
                                     primerapellido.setText("");
                                     segundoapellido.setText("");
                                     //Mensaje
-                                    Toast.makeText(getApplicationContext(), "Se han actualizado los datos correctamente", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), "Se han actualizado los datos correctamente", Toast.LENGTH_SHORT).show();
                                     //Regresamos al menu principal olvidandonos del historial de activities en la app
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
+
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    Fragment este = null;
+                                    este = new FragmentoEstudiantes();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                    fragmentTransaction.replace(R.id.container, este).commit();
+
                                 }else{
-                                    Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Segundo apellido'", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), "Caracteres inválidos en 'Segundo apellido'", Toast.LENGTH_SHORT).show();
                                 }
                             }else{
-                                Toast.makeText(getApplicationContext(), "Segundo apellido vacío", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Segundo apellido vacío", Toast.LENGTH_SHORT).show();
                             }
                         }else{
-                            Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Primer apellido'", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Caracteres inválidos en 'Primer apellido'", Toast.LENGTH_SHORT).show();
                         }
                     }else{
-                        Toast.makeText(getApplicationContext(), "Primer apellido vacío", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Primer apellido vacío", Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Nombre'", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Caracteres inválidos en 'Nombre'", Toast.LENGTH_SHORT).show();
                 }
             }else{
-                Toast.makeText(getApplicationContext(), "Nombre vacío", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Nombre vacío", Toast.LENGTH_SHORT).show();
             }
         }
     };
