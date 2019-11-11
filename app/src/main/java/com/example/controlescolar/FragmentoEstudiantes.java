@@ -28,6 +28,7 @@ public class FragmentoEstudiantes extends Fragment {
         View v = inflater.inflate(R.layout.fragment_estudiantes, container, false);
 
         Button registrar = v.findViewById(R.id.btnRegistrar);
+        registrar.setOnClickListener(reg);
 
 
         Button visualizar = v.findViewById(R.id.btnVisualizar);
@@ -43,6 +44,18 @@ public class FragmentoEstudiantes extends Fragment {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             Fragment este = null;
             este = new VisualizarEstudiante();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.container, este).commit();
+        }
+    };
+
+    View.OnClickListener reg = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            Fragment este = null;
+            este = new RegistrarEstudiante();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             fragmentTransaction.replace(R.id.container, este).commit();

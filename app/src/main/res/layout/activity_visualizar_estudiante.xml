@@ -28,7 +28,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        style="@style/btnAgregar"
         android:id="@+id/btnBuscar"
         style="@style/btnAgregar"
         android:layout_width="85dp"
@@ -155,7 +154,6 @@
     <Button
         style="@style/btnAgregar"
         android:id="@+id/btnGuardar"
-        style="@style/btnAgregar"
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:layout_marginEnd="30dp"
@@ -170,7 +168,6 @@
     <Button
         style="@style/btnCancelar"
         android:id="@+id/btnRegresar"
-        style="@style/btnCancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
