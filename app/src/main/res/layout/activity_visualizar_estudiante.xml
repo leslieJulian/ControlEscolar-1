@@ -50,6 +50,7 @@
         style="@style/estiloEntrada"
         android:layout_width="370dp"
         android:layout_height="40dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
@@ -57,6 +58,7 @@
         android:inputType="textPersonName"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etNumeroControl" />
 
     <EditText
@@ -64,12 +66,14 @@
         style="@style/estiloEntrada"
         android:layout_width="370dp"
         android:layout_height="40dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Primer Apellido"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etNombre" />
 
     <EditText
@@ -77,12 +81,14 @@
         style="@style/estiloEntrada"
         android:layout_width="370dp"
         android:layout_height="40dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Segundo Apellido"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPrimerApellido" />
 
     <TextView
@@ -152,10 +158,11 @@
         app:layout_constraintTop_toBottomOf="@id/spinnerEspecialidad" />
 
     <Button
-        style="@style/btnAgregar"
         android:id="@+id/btnGuardar"
+        style="@style/btnAgregar"
         android:layout_width="350dp"
         android:layout_height="55dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="30dp"
         android:text="Guardar cambios"
         app:layout_constraintBottom_toTopOf="@+id/btnRegresar"

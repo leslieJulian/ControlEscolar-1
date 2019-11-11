@@ -22,48 +22,54 @@
 
     <EditText
         android:id="@+id/etNombre"
+        style="@style/estiloEntrada"
         android:layout_width="370dp"
         android:layout_height="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
-        style="@style/estiloEntrada"
         android:hint="Nombre: "
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etPrimerApellido"
+        style="@style/estiloEntrada"
         android:layout_width="370dp"
         android:layout_height="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:ems="10"
-        style="@style/estiloEntrada"
         android:hint="Primer Apellido:"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etNombre" />
 
     <EditText
         android:id="@+id/etSegundoApellido"
+        style="@style/estiloEntrada"
         android:layout_width="370dp"
         android:layout_height="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:ems="10"
-        style="@style/estiloEntrada"
         android:hint="Segundo Apellido: "
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPrimerApellido" />
 
     <TextView
         android:id="@+id/tvPlanEstudios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="38dp"
         android:text="Plan de estudios:"
         android:textSize="18sp"
@@ -86,8 +92,8 @@
     <TextView
         android:id="@+id/tvEspecialidad"
         android:layout_width="127dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="70dp"
         android:text="Especialidad:"
         android:textSize="18sp"
