@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetalleMateria">
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/txtbaseEstructuraInterfaz"
+                android:layout_width="147dp"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/tvclave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtbaseEstructuraInterfaz"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Clave" />
+
+            <EditText
+                android:id="@+id/txtClave"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvclave"
+                android:layout_marginLeft="-75dp"
+                android:layout_marginTop="-4dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtClave"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Nombre de la materia" />
+
+            <EditText
+                android:id="@+id/txtNombre"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNombre"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tvNombreCorto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtNombre"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Nombre Corto de la materia" />
+
+            <EditText
+                android:id="@+id/txtNombreCorto"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNombreCorto"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tvPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtNombreCorto"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Plan" />
+
+            <Spinner
+                android:id="@+id/spPlanes"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvPlan"
+                android:layout_marginLeft="-75dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz" />
+
+            <TextView
+                android:id="@+id/tvHorasClase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtCreditos"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Horas de Clase" />
+
+            <EditText
+                android:id="@+id/txtHorasClase"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHorasClase"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/tvHorasTeoricas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtHorasClase"
+                android:layout_marginLeft="-75dp"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Horas Teóricas" />
+
+            <EditText
+                android:id="@+id/txtHorasT"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHorasTeoricas"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/tvCreditos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spPlanes"
+                android:layout_marginLeft="-75dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Créditos" />
+
+
+            <EditText
+                android:id="@+id/txtCreditos"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCreditos"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/tvHorasPracticas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtHorasT"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Horas Prácticas" />
+
+            <EditText
+                android:id="@+id/txtHorasP"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHorasPracticas"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/tvSemestre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtHorasP"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Semestre" />
+
+            <EditText
+                android:id="@+id/txtSemestre"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvSemestre"
+                android:layout_alignStart="@+id/tvSemestre"
+                android:layout_marginStart="-1dp"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="number" />
+
+            <CheckBox
+                android:id="@+id/cbEspecialidad"
+                android:onClick="esEspecialidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSemestre"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Especialidad" />
+
+            <Spinner
+                android:id="@+id/spEspecialidades"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cbEspecialidad"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:visibility="gone" />
+
+            <CheckBox
+                android:id="@+id/cbRequisitos"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spEspecialidades"
+                android:layout_marginLeft="-76dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:text="Requisitos"
+                android:onClick="tieneRequisitos"/>
+
+            <EditText
+                android:id="@+id/txtRequisito1"
+                android:hint="Requisito 1"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cbRequisitos"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/txtRequisito2"
+                android:hint="Requisito 2"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRequisito1"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/txtRequisito3"
+                android:hint="Requisito 3"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRequisito2"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/txtRequisito4"
+                android:hint="Requisito 4"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRequisito3"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/txtRequisito5"
+                android:hint="Requisito 5"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRequisito4"
+                android:layout_marginLeft="-77dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/txtbaseEstructuraInterfaz"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnModificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRequisito5"
+                android:layout_toRightOf="@+id/tvclave"
+                android:text="Modificar"
+                android:onClick="modificar"/>
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtRequisito5"
+                android:layout_toRightOf="@+id/btnModificar"
+                android:text="Cancelar"
+                android:onClick="cancelar"/>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

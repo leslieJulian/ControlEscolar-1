@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VisualizaMaterias"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtSemestre1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Semestre 1"></TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSemestre1"
+                android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/txtSemestre2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recycler_view_Materias_Semestre1"
+                android:text="Semestre 2"></TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSemestre2"
+                android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/txtSemestre3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recycler_view_Materias_Semestre2"
+                android:text="Semestre 3"></TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSemestre3"
+                android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/txtSemestre4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recycler_view_Materias_Semestre3"
+                android:text="Semestre 4"></TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtSemestre4"
+                android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/txtSemestre5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Semestre 5"
+                android:layout_below="@id/recycler_view_Materias_Semestre4">
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:layout_below="@id/txtSemestre5"/>
+
+            <TextView
+                android:id="@+id/txtSemestre6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Semestre 6"
+                android:layout_below="@id/recycler_view_Materias_Semestre5">
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:layout_below="@id/txtSemestre6"/>
+
+            <TextView
+                android:id="@+id/txtSemestre7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Semestre 7"
+                android:layout_below="@id/recycler_view_Materias_Semestre6">
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:layout_below="@id/txtSemestre7"/>
+
+            <TextView
+                android:id="@+id/txtSemestre8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Semestre 8"
+                android:layout_below="@id/recycler_view_Materias_Semestre7">
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:layout_below="@id/txtSemestre8"/>
+
+            <TextView
+                android:id="@+id/txtSemestre9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Semestre 9"
+                android:layout_below="@id/recycler_view_Materias_Semestre8">
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_Materias_Semestre9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:layout_below="@id/txtSemestre9"/>
+        </RelativeLayout>
+    </ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_action_name" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
