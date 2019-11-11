@@ -2,7 +2,9 @@ package com.example.controlescolar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,8 +21,11 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-public class RegistrarEstudiante extends AppCompatActivity {
+public class RegistrarEstudiante extends Fragment {
     //Variables locales
     String numeroControl, periodoRegistro;
     ArrayList<String> arregloPlanes;    ArrayList<String> arregloClavesPlanes;
@@ -29,20 +34,35 @@ public class RegistrarEstudiante extends AppCompatActivity {
     Button btnGuardar, btnCancelar;
     Spinner spinnerPlanesEstudio, spinnerEspecialidades;
 
+    View v;
+
+    public RegistrarEstudiante() {
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrar_estudiante);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.activity_registrar_estudiante, container, false);
+
+
         //Inicializando los elementos
-        btnGuardar = (Button)findViewById(R.id.btnGuardar);
+        btnGuardar = (Button)v.findViewById(R.id.btnGuardar);
         btnGuardar.setOnClickListener(guardar);
-        btnCancelar = findViewById(R.id.btnCancelar);
+        btnCancelar = v.findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(cancelar);
-        spinnerEspecialidades = findViewById(R.id.spinnerEspecialidad);
-        spinnerPlanesEstudio = findViewById(R.id.spinnerPlanEstudios);
+        spinnerEspecialidades = v.findViewById(R.id.spinnerEspecialidad);
+        spinnerPlanesEstudio = v.findViewById(R.id.spinnerPlanEstudios);
         spinnerPlanesEstudio.setOnItemSelectedListener(getEspecialidades);
         getPlanesEstudio();
         generarNumeroControl();
+
+        return v;
     }
 
 
@@ -52,7 +72,7 @@ public class RegistrarEstudiante extends AppCompatActivity {
         arregloPlanes = new ArrayList<>();
         arregloClavesPlanes = new ArrayList<>();
         //Inicializando y agregando el adaptador al spinner
-        adaptadorPlanes = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arregloPlanes);
+        adaptadorPlanes = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arregloPlanes);
         spinnerPlanesEstudio.setAdapter(adaptadorPlanes);
         //Obteniendo la referencia al nodo de planesdeestudio
         FirebaseDatabase.getInstance().getReference().child("planesdeestudio")
@@ -72,7 +92,7 @@ public class RegistrarEstudiante extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         // Getting Post failed, log a message
-                        Toast.makeText(getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -100,7 +120,7 @@ public class RegistrarEstudiante extends AppCompatActivity {
                                     }
                                 }
                             }
-                            adaptadorEspecialidades = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arregloEspecialidades);
+                            adaptadorEspecialidades = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, arregloEspecialidades);
                             //Inicializando y agregando el adaptador al spinner
                             spinnerEspecialidades.setAdapter(adaptadorEspecialidades);
                             adaptadorEspecialidades.notifyDataSetChanged();
@@ -109,7 +129,7 @@ public class RegistrarEstudiante extends AppCompatActivity {
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                             // Getting Post failed, log a message
-                            Toast.makeText(getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -148,7 +168,7 @@ public class RegistrarEstudiante extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         // Getting Post failed, log a message
-                        Toast.makeText(getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -175,7 +195,7 @@ public class RegistrarEstudiante extends AppCompatActivity {
                             }
                         }else{
                             numeroControl = digitosPeriodo+"520001";
-                            Toast.makeText(getApplicationContext(), numeroControl, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), numeroControl, Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -183,7 +203,7 @@ public class RegistrarEstudiante extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         // Getting Post failed, log a message
-                        Toast.makeText(getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), databaseError.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -193,18 +213,24 @@ public class RegistrarEstudiante extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             //Regresamos al menu principal olvidandonos del historial de activities en la app
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            Fragment este = null;
+            este = new FragmentoEstudiantes();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.container, este).commit();
         }
     };
+
+
+
     View.OnClickListener guardar = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             //Obteniendo los datos a registrar
-            EditText nombre = findViewById(R.id.etNombre);
-            EditText primerapellido = findViewById(R.id.etPrimerApellido);
-            EditText segundoapellido = findViewById(R.id.etSegundoApellido);
+            EditText nombre = v.findViewById(R.id.etNombre);
+            EditText primerapellido = v.findViewById(R.id.etPrimerApellido);
+            EditText segundoapellido = v.findViewById(R.id.etSegundoApellido);
             //Validando
             if(!nombre.getText().toString().equals("")){
                 //Comparando valor con regex
@@ -222,28 +248,33 @@ public class RegistrarEstudiante extends AppCompatActivity {
                                     primerapellido.setText("");
                                     segundoapellido.setText("");
                                     //Mensaje
-                                    Toast.makeText(getApplicationContext(), "Se ha registrado al estudiante correctamente", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), "Se ha registrado al estudiante correctamente", Toast.LENGTH_SHORT).show();
                                     //Regresamos al menu principal olvidandonos del historial de activities en la app
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
+
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    Fragment este = null;
+                                    este = new FragmentoEstudiantes();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                    fragmentTransaction.replace(R.id.container, este).commit();
+
                                 }else{
-                                    Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Segundo apellido'", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), "Caracteres inválidos en 'Segundo apellido'", Toast.LENGTH_SHORT).show();
                                 }
                             }else{
-                                Toast.makeText(getApplicationContext(), "Segundo apellido vacío", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Segundo apellido vacío", Toast.LENGTH_SHORT).show();
                             }
                         }else{
-                            Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Primer apellido'", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Caracteres inválidos en 'Primer apellido'", Toast.LENGTH_SHORT).show();
                         }
                     }else{
-                        Toast.makeText(getApplicationContext(), "Primer apellido vacío", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Primer apellido vacío", Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Nombre'", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Caracteres inválidos en 'Nombre'", Toast.LENGTH_SHORT).show();
                 }
             }else{
-                Toast.makeText(getApplicationContext(), "Nombre vacío", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Nombre vacío", Toast.LENGTH_SHORT).show();
             }
         }
     };
