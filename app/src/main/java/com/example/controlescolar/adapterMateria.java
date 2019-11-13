@@ -52,7 +52,8 @@ public class adapterMateria extends RecyclerView.Adapter<adapterMateria.viewHold
 
         holder.claveMateria.setText(holder.claveMateria.getText()+" "+materia.getClave());
         holder.nombreMateria.setText(holder.nombreMateria.getText()+" "+materia.getNombre());
-        if(materia.getIsEspecialidad()){
+
+        if(String.valueOf(materia.getIsEspecialidad()).equals("true")){
             int color = Color.parseColor("#008577");
             holder.relativeLayout.setBackgroundColor(color);
         }
@@ -122,7 +123,7 @@ public class adapterMateria extends RecyclerView.Adapter<adapterMateria.viewHold
             this.btnEliminar = (Button) view.findViewById(R.id.btnEliminar);
             this.relativeLayout = (RelativeLayout) view.findViewById(R.id.itemMateria);
         }
-    }
 
+    }
 
 }

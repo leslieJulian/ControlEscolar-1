@@ -63,7 +63,7 @@ public class VisualizaMaterias extends AppCompatActivity {
     }
 
     private void obtenerMaterias(final RecyclerView recyclerView, final int semestre, final TextView textView, final ArrayList<Materia> listMaterias){
-        Query query = mDatabaseReference.orderByChild("semestre").equalTo(semestre);
+        Query query = mDatabaseReference.orderByChild("semestre").equalTo(String.valueOf(semestre));
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

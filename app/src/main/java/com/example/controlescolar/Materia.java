@@ -3,14 +3,12 @@ package com.example.controlescolar;
 public class Materia {
 
 
-    private String clave,nombre,plan,especialidad,requerimiento1,requerimiento2,requerimiento3,requerimiento4,requerimiento5,nombreCorto;
-    private int creditos,horasClase,horasTeoricas,horasPracticas,semestre;
-    private Boolean isEspecialidad, requerimientos;
+    private String clave,nombre,plan,especialidad,requerimiento1,requerimiento2,requerimiento3,requerimiento4,requerimiento5,nombreCorto,creditos,horasClase,horasTeoricas,horasPracticas,semestre,isEspecialidad, requerimientos;
 
     public Materia() {
     }
 
-    public Materia(String clave, String nombre, String nombreCorto, String plan, String especialidad, String requerimiento1, String requerimiento2, String requerimiento3, String requerimiento4, String requerimiento5, int creditos, int horasClase, int horasTeoricas, int horasPracticas, int semestre, boolean isEspecialidad, boolean requerimientos) {
+    public Materia(String clave, String nombre, String nombreCorto, String plan, String especialidad, String requerimiento1, String requerimiento2, String requerimiento3, String requerimiento4, String requerimiento5, String creditos, String horasClase, String horasTeoricas, String horasPracticas, String semestre, String isEspecialidad, String requerimientos) {
         this.clave = clave;
         this.nombre = nombre;
         this.plan = plan;
@@ -103,61 +101,33 @@ public class Materia {
         this.requerimiento5 = requerimiento5;
     }
 
-    public int getCreditos() {
-        return creditos;
-    }
+    public String getCreditos() { return creditos; }
 
-    public void setCreditos(int creditos) {
-        this.creditos = creditos;
-    }
+    public void setCreditos(String creditos) { this.creditos = creditos; }
 
-    public int getHorasClase() {
-        return horasClase;
-    }
+    public String getHorasClase() { return horasClase; }
 
-    public void setHorasClase(int horasClase) {
-        this.horasClase = horasClase;
-    }
+    public void setHorasClase(String horasClase) { this.horasClase = horasClase; }
 
-    public int getHorasTeoricas() {
-        return horasTeoricas;
-    }
+    public String getHorasTeoricas() { return horasTeoricas; }
 
-    public void setHorasTeoricas(int horasTeoricas) {
-        this.horasTeoricas = horasTeoricas;
-    }
+    public void setHorasTeoricas(String horasTeoricas) { this.horasTeoricas = horasTeoricas; }
 
-    public int getHorasPracticas() {
-        return horasPracticas;
-    }
+    public String getHorasPracticas() { return horasPracticas; }
 
-    public void setHorasPracticas(int horasPracticas) {
-        this.horasPracticas = horasPracticas;
-    }
+    public void setHorasPracticas(String horasPracticas) { this.horasPracticas = horasPracticas; }
 
-    public int getSemestre() {
-        return semestre;
-    }
+    public String getSemestre() { return semestre; }
 
-    public void setSemestre(int semestre) {
-        this.semestre = semestre;
-    }
+    public void setSemestre(String semestre) { this.semestre = semestre; }
 
-    public Boolean getRequerimientos() {
-        return requerimientos;
-    }
+    public String getIsEspecialidad() { return isEspecialidad; }
 
-    public void setRequerimientos(Boolean requierimientos) {
-        this.requerimientos = requerimientos;
-    }
+    public void setIsEspecialidad(String isEspecialidad) { this.isEspecialidad = isEspecialidad; }
 
-    public Boolean getIsEspecialidad(){
-        return isEspecialidad;
-    }
+    public String getRequerimientos() { return requerimientos; }
 
-    public void setIsEspecialidad(Boolean especialidad) {
-        isEspecialidad = especialidad;
-    }
+    public void setRequerimientos(String requerimientos) { this.requerimientos = requerimientos; }
 
     public String getNombreCorto() { return nombreCorto; }
 

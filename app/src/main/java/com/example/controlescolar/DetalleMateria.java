@@ -51,17 +51,17 @@ public class DetalleMateria extends AppCompatActivity {
             nombre.setText(parametros.getString("nombre"));
             nombreCorto.setText(parametros.getString("nombreCorto"));
             planes.setSelection(getIndex(planes, parametros.getString("plan")));
-            creditos.setText(parametros.getInt("creditos")+"");
-            horasClase.setText(parametros.getInt("horasClase")+"");
-            horasTeoricas.setText(parametros.getInt("horasTeoricas")+"");
-            horasPracticas.setText(parametros.getInt("horasPracticas")+"");
-            semestre.setText(parametros.getInt("semestre")+"");
-            if(parametros.getBoolean("isEspecialidad")){
+            creditos.setText(parametros.getString("creditos"));
+            horasClase.setText(parametros.getString("horasClase")+"");
+            horasTeoricas.setText(parametros.getString("horasTeoricas")+"");
+            horasPracticas.setText(parametros.getString("horasPracticas")+"");
+            semestre.setText(parametros.getString("semestre")+"");
+            if(Boolean.valueOf(parametros.getString("isEspecialidad"))){
                 especialidad.setChecked(true);
                 especialidadVisible();
                 especialidades.setSelection(getIndex(especialidades, parametros.getString("especialidad")));
             }
-            if(parametros.getBoolean("isRequerimiento")){
+            if(Boolean.valueOf(parametros.getString("isRequerimiento"))){
                 requerimientos.setChecked(true);
                 requisistosVisible();
                 requisito1.setText(parametros.getString("requerimiento1"));
@@ -243,7 +243,9 @@ public class DetalleMateria extends AppCompatActivity {
                 r4 = !requisito4.getText().toString().isEmpty()?requisito4.getText().toString():null;
                 r5 = !requisito5.getText().toString().isEmpty()?requisito5.getText().toString():null;
             }
-            materia = new Materia(idClave, nombreMateria,nombreCortoM ,plan, especialidadMateria, r1, r2, r3, r4, r5, creditosMat,hClase, hTeoria, hPractica, semestreMat, isEspecialidad, isRequerimientos);
+            String auxBooleEsp=String.valueOf(isEspecialidad);
+            String auxBooleReq=String.valueOf(isRequerimientos);//<<<<-----
+            materia = new Materia(idClave, nombreMateria,nombreCortoM ,plan, especialidadMateria, r1, r2, r3, r4, r5,String.valueOf(creditosMat),String.valueOf(hClase), String.valueOf(hTeoria), String.valueOf(hPractica), String.valueOf(semestreMat), auxBooleEsp, auxBooleReq);
         }catch (Exception e){
         }
 
