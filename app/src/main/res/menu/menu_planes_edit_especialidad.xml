@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itemeditarPlan"
+        android:title="Editar plan"></item>
+    <item
+        android:id="@+id/itemListaEspecialidades"
+        android:title="Especialidades del plan"></item>
+</menu>
