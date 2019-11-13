@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">ControlEscolar</string>
+
+    <string-array name="ListaHorarios">
+        <item>(NONE)</item>
+        <item>7:00AM</item>
+        <item>8:00AM</item>
+        <item>9:00AM</item>
+        <item>10:00AM</item>
+        <item>11:00AM</item>
+        <item>12:00AM</item>
+        <item>1:00PM</item>
+        <item>2:00PM</item>
+        <item>3:00PM</item>
+        <item>4:00PM</item>
+        <item>5:00PM</item>
+        <item>6:00PM</item>
+        <item>7:00PM</item>
+        <item>8:00PM</item>
+        <item>9:00PM</item>
+    </string-array>
+    <string-array name="DefaultSelect">
+        <item>(NONE)</item>
+    </string-array>
 </resources>
