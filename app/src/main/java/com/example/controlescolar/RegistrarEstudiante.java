@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -175,9 +176,9 @@ public class RegistrarEstudiante extends AppCompatActivity {
                             }
                         }else{
                             numeroControl = digitosPeriodo+"520001";
-                            Toast.makeText(getApplicationContext(), numeroControl, Toast.LENGTH_SHORT).show();
                         }
-
+                        TextView numero = findViewById(R.id.tvNumControl);
+                        numero.setText("Número de control: "+numeroControl);
                     }
 
                     @Override
@@ -205,36 +206,67 @@ public class RegistrarEstudiante extends AppCompatActivity {
             EditText nombre = findViewById(R.id.etNombre);
             EditText primerapellido = findViewById(R.id.etPrimerApellido);
             EditText segundoapellido = findViewById(R.id.etSegundoApellido);
+            EditText curp = findViewById(R.id.etCurp);
+            EditText calle = findViewById(R.id.etCalle);
+            EditText colonia = findViewById(R.id.etColonia);
+            EditText municipio = findViewById(R.id.etMunicipio);
+            EditText estado = findViewById(R.id.etEstado);
+            EditText codigoPostal = findViewById(R.id.etCodigoPostal);
+            EditText telefono = findViewById(R.id.etTelefono);
+            EditText celular = findViewById(R.id.etCelular);
+            EditText correo = findViewById(R.id.etEmail);
             //Validando
             if(!nombre.getText().toString().equals("")){
                 //Comparando valor con regex
                 if(Pattern.compile("[(A-ZÁ-Úa-zá-ú)*\\s*]+").matcher(nombre.getText().toString()).matches()){
                     if(!primerapellido.getText().toString().equals("")){
-                        //Comparando valor con regex
-                        if(Pattern.compile("[(A-ZÁ-Úa-zá-ú)*\\s*]+").matcher(primerapellido.getText().toString()).matches()){
-                            if(!segundoapellido.getText().toString().equals("")){
-                                //Comparando valor con regex
-                                if(Pattern.compile("[(A-ZÁ-Úa-zá-ú)*\\s*]+").matcher(segundoapellido.getText().toString()).matches()){
-                                    //Guardando los datos en el nodo estudiantes
-                                    FirebaseDatabase.getInstance().getReference().child("estudiantes").child(numeroControl).setValue(new Estudiante(nombre.getText().toString(), primerapellido.getText().toString(), segundoapellido.getText().toString(), periodoRegistro, arregloClavesPlanes.get(spinnerPlanesEstudio.getSelectedItemPosition()).toString(), arregloClavesEspecialidades.get(spinnerEspecialidades.getSelectedItemPosition()).toString()));
-                                    //Limpiando los campos
-                                    nombre.setText("");
-                                    primerapellido.setText("");
-                                    segundoapellido.setText("");
-                                    //Mensaje
-                                    Toast.makeText(getApplicationContext(), "Se ha registrado al estudiante correctamente", Toast.LENGTH_SHORT).show();
-                                    //Regresamos al menu principal olvidandonos del historial de activities en la app
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
+                        if(!curp.getText().toString().equals("")) {
+                            if(!calle.getText().toString().equals("")) {
+                                if(!colonia.getText().toString().equals("")) {
+                                    if(!telefono.getText().toString().equals("") || !celular.getText().toString().equals("")) {
+                                        if(!correo.getText().toString().equals("")) {
+
+                                            //Comparando valor con regex
+                                            if (Pattern.compile("[(A-ZÁ-Úa-zá-ú)*\\s*]+").matcher(primerapellido.getText().toString()).matches()) {
+                                                if (!segundoapellido.getText().toString().equals("")) {
+                                                    //Comparando valor con regex
+                                                    if (Pattern.compile("[(A-ZÁ-Úa-zá-ú)*\\s*]+").matcher(segundoapellido.getText().toString()).matches()) {
+                                                        //Guardando los datos en el nodo estudiantes
+                                                        FirebaseDatabase.getInstance().getReference().child("estudiantes").child(numeroControl).setValue(new Estudiante(nombre.getText().toString(), primerapellido.getText().toString(), segundoapellido.getText().toString(), curp.getText().toString(), calle.getText().toString(), colonia.getText().toString(), municipio.getText().toString(), estado.getText().toString(), codigoPostal.getText().toString(), telefono.getText().toString(), celular.getText().toString(), correo.getText().toString(), arregloClavesPlanes.get(spinnerPlanesEstudio.getSelectedItemPosition()).toString(), arregloClavesEspecialidades.get(spinnerEspecialidades.getSelectedItemPosition()).toString(), periodoRegistro));
+                                                        //Limpiando los campos
+                                                        nombre.setText(""); curp.setText(""); calle.setText(""); colonia.setText("");
+                                                        primerapellido.setText(""); telefono.setText(""); celular.setText("");
+                                                        segundoapellido.setText(""); correo.setText("");
+                                                        //Mensaje
+                                                        Toast.makeText(getApplicationContext(), "Se ha registrado al estudiante correctamente", Toast.LENGTH_SHORT).show();
+                                                        //Regresamos al menu principal olvidandonos del historial de activities en la app
+                                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        startActivity(intent);
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Segundo apellido'", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } else {
+                                                    Toast.makeText(getApplicationContext(), "Segundo apellido vacío", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Primer apellido'", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }else{
+                                            Toast.makeText(getApplicationContext(), "Especifique un correo electrónico", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }else{
+                                        Toast.makeText(getApplicationContext(), "Especifique un teléfono o celular", Toast.LENGTH_SHORT).show();
+                                    }
                                 }else{
-                                    Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Segundo apellido'", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Campo colonia vacía", Toast.LENGTH_SHORT).show();
                                 }
                             }else{
-                                Toast.makeText(getApplicationContext(), "Segundo apellido vacío", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Campo calle vacía", Toast.LENGTH_SHORT).show();
                             }
                         }else{
-                            Toast.makeText(getApplicationContext(), "Caracteres inválidos en 'Primer apellido'", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Campo CURP vacía", Toast.LENGTH_SHORT).show();
                         }
                     }else{
                         Toast.makeText(getApplicationContext(), "Primer apellido vacío", Toast.LENGTH_SHORT).show();

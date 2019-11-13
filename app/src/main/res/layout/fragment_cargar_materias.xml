@@ -8,7 +8,7 @@
     tools:context=".FragmentCargarMaterias">
 
     <EditText
-        android:id="@+id/numeroControl"
+        android:id="@+id/numControl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -33,7 +33,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/numeroControl">
+        app:layout_constraintTop_toBottomOf="@id/numControl">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMaterias"

@@ -1,6 +1,9 @@
 package com.example.controlescolar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +23,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-public class FragmentHorario extends Fragment {
+public class FragmentHorario extends Fragment{
     static Activity activity;
     static View v;
     public static ArrayList<String> claves = new ArrayList<String>();
@@ -39,7 +42,8 @@ public class FragmentHorario extends Fragment {
     }
 
     public static void cargarHorario(){
-        limpiarCampos();guardar.setEnabled(true);
+        limpiarCampos();
+        FragmentCargarMaterias.rellenarColoresHorario();
         //Validamos num de control
         if(!FragmentCargarMaterias.numControlString.equals("")){
         //Verificamos que el alumno existe
@@ -67,6 +71,7 @@ public class FragmentHorario extends Fragment {
                                             }
                                             //Si aun no ha cargado materias el estudiante, se procede a mostrar el horario segun sus elecciones
                                             if (valor) {
+                                                guardar.setEnabled(true);
                                                 //Recorremos cada materia seleccionada y sus datos los colocamos
                                                 //en los dias correspondientes
                                                 for(int i=0; i<claves.size(); i+=2){
@@ -75,131 +80,619 @@ public class FragmentHorario extends Fragment {
                                                         if((claves.get(i).equals(FragmentCargarMaterias.materias.get(k).getClave()))&&(claves.get(i+1).equals(FragmentCargarMaterias.materias.get(k).getHora()))){
                                                             //Según su horario
                                                             String clase = FragmentCargarMaterias.materias.get(k).getNombre()+", \nAula: "+FragmentCargarMaterias.materias.get(k).getAula();
+
+                                                            FragmentCargarMaterias.materias.get(k).setColor(FragmentCargarMaterias.coloresFondoH.get(0));
+                                                            FragmentCargarMaterias.coloresFondoH.remove(0);
+
                                                             switch(FragmentCargarMaterias.materias.get(k).getHora()){
-                                                                case "07:00":
-                                                                    TextView dia = v.findViewById(R.id.lunes7a8); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes7a8); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles7a8); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves7a8); dia.setText(clase);
+                                                                case "07:00-08:00":
+                                                                    TextView dia = v.findViewById(R.id.lunes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes7a8); dia.setText(clase); dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes7a8); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "08:00":
-                                                                    dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes8a9); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);
+                                                                case "08:00-09:00":
+                                                                    dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "09:00":
-                                                                    dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes9a10); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);
+                                                                case "09:00-10:00":
+                                                                    dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "10:00":
-                                                                    dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes10a11); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);
+                                                                case "10:00-11:00":
+                                                                    dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "11:00":
-                                                                    dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes11a12); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);
+                                                                case "11:00-12:00":
+                                                                    dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "12:00":
-                                                                    dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes12a13); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);
+                                                                case "12:00-13:00":
+                                                                    dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "13:00":
-                                                                    dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes13a14); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);
+                                                                case "13:00-14:00":
+                                                                    dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "14:00":
-                                                                    dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes14a15); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);
+                                                                case "14:00-15:00":
+                                                                    dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "15:00":
-                                                                    dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes15a16); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);
+                                                                case "15:00-16:00":
+                                                                    dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "16:00":
-                                                                    dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes16a17); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);
+                                                                case "16:00-17:00":
+                                                                    dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "17:00":
-                                                                    dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes17a18); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);
+                                                                case "17:00-18:00":
+                                                                    dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "18:00":
-                                                                    dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes18a19); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);
+                                                                case "18:00-19:00":
+                                                                    dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "19:00":
-                                                                    dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes19a20); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);
+                                                                case "19:00-20:00":
+                                                                    dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
-                                                                case "20:00":
-                                                                    dia = v.findViewById(R.id.lunes20a21); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.martes20a21); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.miercoles20a21); dia.setText(clase);
-                                                                    dia = v.findViewById(R.id.jueves20a21); dia.setText(clase);
+                                                                case "20:00-21:00":
+                                                                    dia = v.findViewById(R.id.lunes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
-                                                                        dia = v.findViewById(R.id.viernes20a21); dia.setText(clase);
+                                                                        dia = v.findViewById(R.id.viernes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "07:00-09:00":
+                                                                    dia = v.findViewById(R.id.lunes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "08:00-10:00":
+                                                                    dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "09:00:11:00":
+                                                                    dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "10:00-12:00":
+                                                                    dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "11:00-13:00":
+                                                                    dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "12:00-14:00":
+                                                                    dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "13:00-15:00":
+                                                                    dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "14:00-16:00":
+                                                                    dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "15:00-17:00":
+                                                                    dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "16:00-18:00":
+                                                                    dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "17:00-19:00":
+                                                                    dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "18:00-20:00":
+                                                                    dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "19:00-21:00":
+                                                                    dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "07:00:10:00":
+                                                                    dia = v.findViewById(R.id.lunes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "08:00-11:00":
+                                                                    dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "09:00:12:00":
+                                                                    dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "10:00-13:00":
+                                                                    dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "11:00-14:00":
+                                                                    dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "12:00-15:00":
+                                                                    dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "13:00-16:00":
+                                                                    dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "14:00-17:00":
+                                                                    dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "15:00-18:00":
+                                                                    dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "16:00-19:00":
+                                                                    dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "17:00-20:00":
+                                                                    dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    break;
+                                                                case "18:00-21:00":
+                                                                    dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    }
+                                                                    dia = v.findViewById(R.id.lunes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.martes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.miercoles20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    dia = v.findViewById(R.id.jueves20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
+                                                                    if(Integer.parseInt(FragmentCargarMaterias.materias.get(k).getCreditos()) > 4){
+                                                                        dia = v.findViewById(R.id.viernes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(FragmentCargarMaterias.materias.get(k).getColor()));
                                                                     }
                                                                     break;
                                                             }
@@ -208,6 +701,7 @@ public class FragmentHorario extends Fragment {
                                                     }
                                                 }
                                             } else {//Si el horario ya fue asignado, se recuperan los datos de las materias
+                                                materiasCargadas.clear();
                                                 guardar.setEnabled(false);
                                                 FirebaseDatabase.getInstance().getReference().child("seleccionmaterias").orderByChild("estudiante").equalTo(FragmentCargarMaterias.numControlString)
                                                         .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -236,6 +730,8 @@ public class FragmentHorario extends Fragment {
                                                                                             materiasCargadas.add(gpo.getHora());
                                                                                             materiasCargadas.add("");
                                                                                             materiasCargadas.add(gpo.getAula());
+                                                                                            materiasCargadas.add("");
+                                                                                            Log.d("GPO:", gpo.getNombre());
                                                                                             break;
                                                                                         }
                                                                                     }
@@ -247,141 +743,638 @@ public class FragmentHorario extends Fragment {
                                                                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                                                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                                                                     Materia materia = snapshot.getValue(Materia.class);
-                                                                                                    for(int i=0; i<materiasCargadas.size(); i+= 5){
+                                                                                                    for(int i=0; i<materiasCargadas.size(); i+= 6){
                                                                                                         if(materiasCargadas.get(i+1).equals(snapshot.getKey())){
                                                                                                             materiasCargadas.set(i+1, materia.getNombreCorto());
                                                                                                             materiasCargadas.set(i+3, materia.getCreditos());
+                                                                                                            boolean noColoreada = true;
+                                                                                                            for(int j=0; j<materiasCargadas.size(); j+= 6){
+                                                                                                                if((materiasCargadas.get(i+1).equals(materiasCargadas.get(j+1)))&&(!materiasCargadas.get(j+5).equals(""))){
+                                                                                                                    //Si ya existe la materia en el horario
+                                                                                                                    materiasCargadas.set(i+5, materiasCargadas.get(j+5));
+                                                                                                                    noColoreada = false;
+                                                                                                                    break;
+                                                                                                                }
+                                                                                                            }
+                                                                                                            if(noColoreada){
+                                                                                                                materiasCargadas.set(i+5, FragmentCargarMaterias.coloresFondoH.get(0));
+                                                                                                                FragmentCargarMaterias.coloresFondoH.remove(0);
+                                                                                                            }
                                                                                                         }
                                                                                                     }
                                                                                                 }
                                                                                                 //FINALMENTE mostramos el horario
-                                                                                                for(int i=0; i<materiasCargadas.size(); i+=5){
+                                                                                                for(int i=0; i<materiasCargadas.size(); i+=6){
                                                                                                     String clase = materiasCargadas.get(i+1)+", \nAula: "+materiasCargadas.get(i+4);
                                                                                                     switch(materiasCargadas.get(i+2)){
-                                                                                                        case "07:00":
-                                                                                                            TextView dia = v.findViewById(R.id.lunes7a8); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes7a8); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles7a8); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves7a8); dia.setText(clase);
+                                                                                                        case "07:00-08:00":
+                                                                                                            TextView dia = v.findViewById(R.id.lunes7a8); dia.setText(clase); dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes7a8); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "08:00":
-                                                                                                            dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes8a9); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);
+                                                                                                        case "08:00-09:00":
+                                                                                                            dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "09:00":
-                                                                                                            dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes9a10); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);
+                                                                                                        case "09:00-10:00":
+                                                                                                            dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "10:00":
-                                                                                                            dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes10a11); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);
+                                                                                                        case "10:00-11:00":
+                                                                                                            dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "11:00":
-                                                                                                            dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes11a12); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);
+                                                                                                        case "11:00-12:00":
+                                                                                                            dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "12:00":
-                                                                                                            dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes12a13); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);
+                                                                                                        case "12:00-13:00":
+                                                                                                            dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "13:00":
-                                                                                                            dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes13a14); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);
+                                                                                                        case "13:00-14:00":
+                                                                                                            dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "14:00":
-                                                                                                            dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes14a15); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);
+                                                                                                        case "14:00-15:00":
+                                                                                                            dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "15:00":
-                                                                                                            dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes15a16); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);
+                                                                                                        case "15:00-16:00":
+                                                                                                            dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "16:00":
-                                                                                                            dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes16a17); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);
+                                                                                                        case "16:00-17:00":
+                                                                                                            dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "17:00":
-                                                                                                            dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes17a18); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);
+                                                                                                        case "17:00-18:00":
+                                                                                                            dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "18:00":
-                                                                                                            dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes18a19); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);
+                                                                                                        case "18:00-19:00":
+                                                                                                            dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "19:00":
-                                                                                                            dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes19a20); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);
+                                                                                                        case "19:00-20:00":
+                                                                                                            dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
-                                                                                                        case "20:00":
-                                                                                                            dia = v.findViewById(R.id.lunes20a21); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.martes20a21); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.miercoles20a21); dia.setText(clase);
-                                                                                                            dia = v.findViewById(R.id.jueves20a21); dia.setText(clase);
+                                                                                                        case "20:00-21:00":
+                                                                                                            dia = v.findViewById(R.id.lunes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
-                                                                                                                dia = v.findViewById(R.id.viernes20a21); dia.setText(clase);
+                                                                                                                dia = v.findViewById(R.id.viernes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "07:00-09:00":
+                                                                                                            dia = v.findViewById(R.id.lunes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "08:00-10:00":
+                                                                                                            dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "09:00:11:00":
+                                                                                                            dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "10:00-12:00":
+                                                                                                            dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "11:00-13:00":
+                                                                                                            dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "12:00-14:00":
+                                                                                                            dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "13:00-15:00":
+                                                                                                            dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "14:00-16:00":
+                                                                                                            dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "15:00-17:00":
+                                                                                                            dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "16:00-18:00":
+                                                                                                            dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "17:00-19:00":
+                                                                                                            dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "18:00-20:00":
+                                                                                                            dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "19:00-21:00":
+                                                                                                            dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "07:00:10:00":
+                                                                                                            dia = v.findViewById(R.id.lunes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes7a8); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "08:00-11:00":
+                                                                                                            dia = v.findViewById(R.id.lunes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes8a9); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "09:00:12:00":
+                                                                                                            dia = v.findViewById(R.id.lunes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes9a10); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "10:00-13:00":
+                                                                                                            dia = v.findViewById(R.id.lunes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes10a11); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "11:00-14:00":
+                                                                                                            dia = v.findViewById(R.id.lunes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes11a12); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "12:00-15:00":
+                                                                                                            dia = v.findViewById(R.id.lunes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes12a13); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "13:00-16:00":
+                                                                                                            dia = v.findViewById(R.id.lunes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes13a14); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "14:00-17:00":
+                                                                                                            dia = v.findViewById(R.id.lunes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes14a15); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "15:00-18:00":
+                                                                                                            dia = v.findViewById(R.id.lunes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes15a16); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "16:00-19:00":
+                                                                                                            dia = v.findViewById(R.id.lunes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes16a17); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "17:00-20:00":
+                                                                                                            dia = v.findViewById(R.id.lunes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes17a18); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            break;
+                                                                                                        case "18:00-21:00":
+                                                                                                            dia = v.findViewById(R.id.lunes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes18a19); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes19a20); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            }
+                                                                                                            dia = v.findViewById(R.id.lunes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.martes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.miercoles20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            dia = v.findViewById(R.id.jueves20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
+                                                                                                            if(Integer.parseInt(materiasCargadas.get(i+3)) > 4){
+                                                                                                                dia = v.findViewById(R.id.viernes20a21); dia.setText(clase);dia.setTextColor(Color.parseColor(materiasCargadas.get(i+5)));
                                                                                                             }
                                                                                                             break;
                                                                                                     }
@@ -425,6 +1418,8 @@ public class FragmentHorario extends Fragment {
 
                     }
                 });
+        }else{
+            limpiarCampos();
         }
     }
     public static void limpiarCampos(){
@@ -524,36 +1519,49 @@ public class FragmentHorario extends Fragment {
     View.OnClickListener guardarHorario = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            FirebaseDatabase.getInstance().getReference().child("materias").orderByChild("plan").equalTo(FragmentCargarMaterias.plan)
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                Materia m = snapshot.getValue(Materia.class);
-                                for(int i=0; i<FragmentCargarMaterias.materias.size(); i++){
-                                    if(m.getClave().equals(FragmentCargarMaterias.materias.get(i).getClave())) {
-                                        for (int k = 0; k < claves.size(); k += 2) {
-                                            if (claves.get(k).equals(FragmentCargarMaterias.materias.get(i).getClave())) {
-                                                String clave = FragmentCargarMaterias.materias.get(i).getGrupo() + "%" +
-                                                        FragmentCargarMaterias.plan + "%" +
-                                                        snapshot.getKey() + "%" + FragmentCargarMaterias.periodoActual + "%" +
-                                                        FragmentCargarMaterias.numControlString;
-                                                //Cada materia seleccionada se agrega a la BD
-                                                FirebaseDatabase.getInstance().getReference().child("seleccionmaterias").child(clave).setValue(new SeleccionMaterias(FragmentCargarMaterias.numControlString));
+            AlertDialog.Builder dialogo = new AlertDialog.Builder(getActivity());
+                    dialogo.setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Guardar Horario")
+                    .setMessage("¿Estás seguro de querer guardar tus materias? No se podrá modificar el horario nuevamente")
+                    .setPositiveButton("Sí", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which) {
+                            FirebaseDatabase.getInstance().getReference().child("materias").orderByChild("plan").equalTo(FragmentCargarMaterias.plan)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                Materia m = snapshot.getValue(Materia.class);
+                                                for(int i=0; i<MateriasAdaptador.materias.size(); i++){
+                                                    if(m.getClave().equals(MateriasAdaptador.materias.get(i).getClave())) {
+                                                        for (int k = 0; k < claves.size(); k += 2) {
+                                                            if ((claves.get(k).equals(MateriasAdaptador.materias.get(i).getClave())&&(claves.get(k+1).equals(MateriasAdaptador.materias.get(i).getHora())))) {
+                                                                String clave = MateriasAdaptador.materias.get(i).getGrupo() + "%" +
+                                                                        FragmentCargarMaterias.plan + "%" +
+                                                                        snapshot.getKey() + "%" + FragmentCargarMaterias.periodoActual + "%" +
+                                                                        FragmentCargarMaterias.numControlString;
+                                                                //Cada materia seleccionada se agrega a la BD
+                                                                FirebaseDatabase.getInstance().getReference().child("seleccionmaterias").child(clave).setValue(new SeleccionMaterias(FragmentCargarMaterias.numControlString));
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
+                                            FragmentCargarMaterias.materias.clear();
+                                            FragmentCargarMaterias.rvMaterias.getAdapter().notifyDataSetChanged();
                                         }
-                                    }
-                                }
-                            }
-                            FragmentCargarMaterias.materias.clear();
-                            FragmentCargarMaterias.rvMaterias.getAdapter().notifyDataSetChanged();
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
                         }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
 
-                        }
-                    });
 
         }
     };

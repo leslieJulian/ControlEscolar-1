@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".VisualizarEstudiante">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <!--NÚMERO DE CONTROL-->
     <EditText
         android:id="@+id/etNumeroControl"
@@ -111,6 +117,222 @@
         app:layout_constraintStart_toEndOf="@id/tvSegundoApellido"
         app:layout_constraintTop_toBottomOf="@id/etPrimerApellido" />
 
+            <!--CURP-->
+            <TextView
+                android:id="@+id/tvCurp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CURP:"
+                app:layout_constraintTop_toTopOf="@id/tvSegundoApellido"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etCurp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvCurp"
+                app:layout_constraintTop_toBottomOf="@id/etSegundoApellido" />
+
+            <!--CALLE-->
+            <TextView
+                android:id="@+id/tvCalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calle:"
+                app:layout_constraintTop_toTopOf="@id/tvCurp"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etCalle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvCalle"
+                app:layout_constraintTop_toBottomOf="@id/etCurp" />
+
+            <!--COLONIA-->
+            <TextView
+                android:id="@+id/tvColonia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Colonia:"
+                app:layout_constraintTop_toTopOf="@id/tvCalle"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etColonia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvColonia"
+                app:layout_constraintTop_toBottomOf="@id/etCalle" />
+
+            <!--MUNICIPIO-->
+            <TextView
+                android:id="@+id/tvMunicipio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Municipio:"
+                app:layout_constraintTop_toTopOf="@id/tvColonia"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etMunicipio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvMunicipio"
+                app:layout_constraintTop_toBottomOf="@id/etColonia" />
+
+            <!--ESTADO-->
+            <TextView
+                android:id="@+id/tvEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado:"
+                app:layout_constraintTop_toTopOf="@id/tvMunicipio"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etEstado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvEstado"
+                app:layout_constraintTop_toBottomOf="@id/etMunicipio" />
+
+            <!--CÓDIGO POSTAL-->
+            <TextView
+                android:id="@+id/tvCodigoPostal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Código postal:"
+                app:layout_constraintTop_toTopOf="@id/tvEstado"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etCodigoPostal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvCodigoPostal"
+                app:layout_constraintTop_toBottomOf="@id/etEstado" />
+
+            <!--TELEFONO-->
+            <TextView
+                android:id="@+id/tvTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono:"
+                app:layout_constraintTop_toTopOf="@id/tvCodigoPostal"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etTelefono"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTelefono"
+                app:layout_constraintTop_toBottomOf="@id/etCodigoPostal" />
+
+            <!--CELULAR-->
+            <TextView
+                android:id="@+id/tvCelular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Celular:"
+                app:layout_constraintTop_toTopOf="@id/tvTelefono"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etCelular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvCelular"
+                app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+
+            <!--EMAIL-->
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correo electrónico:"
+                app:layout_constraintTop_toTopOf="@id/tvCelular"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="30dp"/>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvEmail"
+                app:layout_constraintTop_toBottomOf="@id/etCelular" />
+
     <!--PLAN DE ESTUDIOS-->
     <TextView
         android:id="@+id/tvPlanEstudios"
@@ -122,7 +344,7 @@
         android:text="Plan de estudios:"
         app:layout_constraintEnd_toStartOf="@id/spinnerPlanEstudios"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSegundoApellido" />
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
     <Spinner
         android:id="@+id/spinnerPlanEstudios"
@@ -132,7 +354,7 @@
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvPlanEstudios"
-        app:layout_constraintTop_toBottomOf="@id/etSegundoApellido" />
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
     <!--ESPECIALIDAD-->
     <TextView
@@ -193,4 +415,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvPeriodo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnGuardar"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.MateriasViewHolder> {
     //Arreglo de materias a cargar
-    ArrayList<PojoMateria> materias;
+    static ArrayList<PojoMateria> materias;
     Activity act;
 
     public MateriasAdaptador(ArrayList<PojoMateria> materias, Activity activity) {
@@ -70,17 +70,37 @@ public class MateriasAdaptador extends RecyclerView.Adapter<MateriasAdaptador.Ma
                 if(b) {
                     boolean traslape = false, mismaMateria = false;
                     //Se verifica si hay traslapes de hora
-                    for(int i=0; i<FragmentHorario.claves.size(); i+=2){
-                        //Si ya existe una materia en esa hora
-                        if((FragmentHorario.claves.get(i+1).equals(materia.getHora()))){
-                            traslape = true;
-                            break;
-                        //Si es la misma materia
-                        }else if((FragmentHorario.claves.get(i).equals(materia.getClave()))){
-                            mismaMateria = true;
-                            break;
+                    int horaInicio = Integer.parseInt(materia.getHora().substring(0,2));
+                    int horaFin = Integer.parseInt(materia.getHora().substring(6,8));
+                    //Si es una materia de más de dos horas
+                    //if((horaFin-horaInicio)>1){
+                        for (int i = 0; i < FragmentHorario.claves.size(); i += 2) {
+                            int materiaInicio = Integer.parseInt(FragmentHorario.claves.get(i+1).substring(0,2));
+                            int materiaFin = Integer.parseInt(FragmentHorario.claves.get(i+1).substring(6,8));
+                            //Si hay traslape
+                            if(((materiaInicio >= horaInicio) && ((materiaInicio < horaFin))) || ((horaInicio >= materiaInicio) && (horaInicio < materiaFin))){
+                                traslape = true;
+                                break;
+                                //Si es la misma materia
+                            } else if ((FragmentHorario.claves.get(i).equals(materia.getClave()))) {
+                                mismaMateria = true;
+                                break;
+                            }
                         }
-                    }
+
+                    /*}else {
+                        for (int i = 0; i < FragmentHorario.claves.size(); i += 2) {
+                            //Si ya existe una materia en esa hora
+                            if ((FragmentHorario.claves.get(i + 1).equals(materia.getHora()))) {
+                                traslape = true;
+                                break;
+                                //Si es la misma materia
+                            } else if ((FragmentHorario.claves.get(i).equals(materia.getClave()))) {
+                                mismaMateria = true;
+                                break;
+                            }
+                        }
+                    }*/
                     if(!traslape && !mismaMateria){
                         //Si es marcada se agrega al horario
                         FragmentHorario.claves.add(holder.clave.getText().toString());

@@ -23,6 +23,8 @@ public class FragmentPagerAdapterEstudiantes extends FragmentPagerAdapter {
             return new FragmentCargarMaterias();
         }else if(posicion == 1){
             return new FragmentHorario(activity);
+        }else if(posicion == 2){
+            return new FragmentConsultaHorarios(activity);
         }else{
             return null;
         }
@@ -30,7 +32,7 @@ public class FragmentPagerAdapterEstudiantes extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -41,6 +43,8 @@ public class FragmentPagerAdapterEstudiantes extends FragmentPagerAdapter {
                 return ("Materias");
             case 1:
                 return "Horario";
+            case 2:
+                return "Consulta Horario";
             default:
                 return null;
         }

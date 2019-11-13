@@ -29,7 +29,7 @@ public class FragmentCargarMaterias extends Fragment {
     SwipeRefreshLayout srCargarMaterias;
     public static ArrayList<PojoMateria> materias;
     ArrayList<String> listaMaterias;
-    public static ArrayList<String> coloresFondo;
+    public static ArrayList<String> coloresFondo, coloresFondoH;
     ArrayList<String> evaluacionesAlumno;
     String periodoRegistro, especialidad, semestre = "";
     public static String periodoActual, numControlString = "", plan;
@@ -58,15 +58,16 @@ public class FragmentCargarMaterias extends Fragment {
         btnCargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                inicializarDatos();
                 MateriasAdaptador adaptador = new MateriasAdaptador(materias, actividad);
                 rvMaterias.setAdapter(adaptador);
+                inicializarDatos();
             }
         });
 
         srCargarMaterias = v.findViewById(R.id.refreshMaterias);
         srCargarMaterias.setOnRefreshListener(refreshAction);
 
+        numControlString = "";
         return v;
     }
 
@@ -99,10 +100,10 @@ public class FragmentCargarMaterias extends Fragment {
 
     public void inicializarDatos(){
         materias.clear();
-        rellenarColores();
+        rellenarColores(); rellenarColoresHorario();
         FragmentHorario.claves.clear();
         FragmentHorario.limpiarCampos();
-        numControl = v.findViewById(R.id.numeroControl);
+        numControl = v.findViewById(R.id.numControl);
         numControlString = numControl.getText().toString();
         //Validamos num de control
         if(!numControl.getText().toString().equals("")){
@@ -229,7 +230,6 @@ public class FragmentCargarMaterias extends Fragment {
                                             }
                                         });
                             }else{
-                                numControl.setText("");
                                 Toast.makeText(getActivity(), "No existe este número de control", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -249,6 +249,7 @@ public class FragmentCargarMaterias extends Fragment {
         @Override
         public void onRefresh() {
             inicializarDatos();
+            rellenarColores();
             srCargarMaterias.setRefreshing(false);
         }
     };
@@ -379,11 +380,19 @@ public class FragmentCargarMaterias extends Fragment {
         }
     }
 
-    public void rellenarColores(){
+    public static void rellenarColores(){
         coloresFondo = new ArrayList<String>();
         coloresFondo.add("#ffadad"); coloresFondo.add("#c6ffad"); coloresFondo.add("#d7adff");
-        coloresFondo.add("#ffdcad"); coloresFondo.add("#adffd7"); coloresFondo.add("ffadfb");
+        coloresFondo.add("#ffdcad"); coloresFondo.add("#adffd7"); coloresFondo.add("#ffadfb");
         coloresFondo.add("#feffad"); coloresFondo.add("#adc8ff"); coloresFondo.add("#ffadb8");
         coloresFondo.add("#c5c5c5");
+    }
+
+    public static void rellenarColoresHorario(){
+        coloresFondoH = new ArrayList<String>();
+        coloresFondoH.add("#257a3c"); coloresFondoH.add("#044b78"); coloresFondoH.add("#a1a303");
+        coloresFondoH.add("#a30805"); coloresFondoH.add("#5c1a99"); coloresFondoH.add("#db7280");
+        coloresFondoH.add("#7ca152"); coloresFondoH.add("#000000"); coloresFondoH.add("#12c4b0");
+        coloresFondoH.add("#e89505");
     }
 }

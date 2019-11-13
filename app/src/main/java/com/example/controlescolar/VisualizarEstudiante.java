@@ -24,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class VisualizarEstudiante extends AppCompatActivity {
 
-    EditText numeroControl, nombre, primerapellido, segundoapellido;
+    EditText numeroControl, nombre, primerapellido, segundoapellido, curp, calle, colonia, municipio, estado, codigoPostal, telefono, celular, correo;
     TextView periodo;
     Button btnBuscar, btnRegresar, btnGuardar;
     ArrayList<String> arregloClavesPlanes, arregloPlanes, arrayClavesEspecialidades, arrayEspecialidades;
@@ -49,6 +49,9 @@ public class VisualizarEstudiante extends AppCompatActivity {
         nombre = findViewById(R.id.etNombre);
         primerapellido = findViewById(R.id.etPrimerApellido);
         segundoapellido = findViewById(R.id.etSegundoApellido);
+        curp = findViewById(R.id.etCurp); calle = findViewById(R.id.etCalle); colonia = findViewById(R.id.etColonia);
+        municipio = findViewById(R.id.etMunicipio); estado = findViewById(R.id.etEstado); codigoPostal = findViewById(R.id.etCodigoPostal);
+        telefono = findViewById(R.id.etTelefono); celular = findViewById(R.id.etCelular); correo = findViewById(R.id.etEmail);
         periodo = findViewById(R.id.tvPeriodo);
         getPlanesEstudio();
     }
@@ -143,6 +146,15 @@ public class VisualizarEstudiante extends AppCompatActivity {
                                 nombre.setText(estudiante.getNombre());
                                 primerapellido.setText(estudiante.getPrimerapellido());
                                 segundoapellido.setText(estudiante.getSegundoapellido());
+                                telefono.setText(estudiante.getTelefono());
+                                celular.setText(estudiante.getCelular());
+                                calle.setText(estudiante.getCalle());
+                                codigoPostal.setText(estudiante.getCodigoPostal());
+                                colonia.setText(estudiante.getColonia());
+                                correo.setText(estudiante.getCorreo());
+                                curp.setText(estudiante.getCurp());
+                                municipio.setText(estudiante.getMunicipio());
+                                estado.setText(estudiante.getEstado());
                                 for(int i=0; i<arregloClavesPlanes.size(); i++) {
                                     if(arregloClavesPlanes.get(i).equals(estudiante.getPlan())) {
                                         spinnerPlanesEstudio.setSelection(i);
@@ -204,7 +216,7 @@ public class VisualizarEstudiante extends AppCompatActivity {
                                 //Comparando valor con regex
                                 if(Pattern.compile("[(A-ZÁ-Úa-zá-ú)*\\s*]+").matcher(segundoapellido.getText().toString()).matches()){
                                     //Guardando los datos en el nodo estudiantes
-                                    FirebaseDatabase.getInstance().getReference().child("estudiantes").child(numeroControl.getText().toString()).setValue(new Estudiante(nombre.getText().toString(), primerapellido.getText().toString(), segundoapellido.getText().toString(), periodoRegistrado, arregloClavesPlanes.get(spinnerPlanesEstudio.getSelectedItemPosition()).toString(), arrayClavesEspecialidades.get(spinnerEspecialidades.getSelectedItemPosition()).toString()));
+                                    FirebaseDatabase.getInstance().getReference().child("estudiantes").child(numeroControl.getText().toString()).setValue(new Estudiante(nombre.getText().toString(), primerapellido.getText().toString(), segundoapellido.getText().toString(), curp.getText().toString(), calle.getText().toString(), colonia.getText().toString(), municipio.getText().toString(), estado.getText().toString(), codigoPostal.getText().toString(), telefono.getText().toString(), celular.getText().toString(), correo.getText().toString(), arregloClavesPlanes.get(spinnerPlanesEstudio.getSelectedItemPosition()).toString(), arrayClavesEspecialidades.get(spinnerEspecialidades.getSelectedItemPosition()).toString(), periodoRegistrado));
                                     //Limpiando los campos
                                     nombre.setText("");
                                     primerapellido.setText("");
