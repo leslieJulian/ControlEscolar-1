@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class FragmentoMaterias extends Fragment {
 
@@ -26,7 +29,23 @@ public class FragmentoMaterias extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_materias, container, false);
 
+        Button especialidades = v.findViewById(R.id.btnEspecialidades);
+
+        especialidades.setOnClickListener(esp);
+
         return v;
     }
+
+    View.OnClickListener esp = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            Fragment este = null;
+            este = new Lista_especialidades_act();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.container, este).commit();
+        }
+    };
 
 }

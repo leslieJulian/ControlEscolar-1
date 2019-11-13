@@ -18,26 +18,41 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class Lista_especialidades_act extends AppCompatActivity {
+public class Lista_especialidades_act extends Fragment {
     private ArrayList<EspecialidadE> lista_especialidades;
     private DatabaseReference databaseReference;
     private ArrayList<String> lista_keys;
 
     private RecyclerView recyclerView;
+    public View v;
+
+    public Lista_especialidades_act() {
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_especialidades_act);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.activity_lista_especialidades_act, container, false);
+
+        FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,11 +62,12 @@ public class Lista_especialidades_act extends AppCompatActivity {
         });
         inicialrComponentes();
 
+        return v;
 
     }
 
     public void iniciarAdaptador() {
-        EspecialidadesAdaptador adaptador = new EspecialidadesAdaptador(lista_especialidades, Lista_especialidades_act.this,lista_keys);
+        EspecialidadesAdaptador adaptador = new EspecialidadesAdaptador(lista_especialidades, getActivity(),lista_keys);
         recyclerView.setAdapter(adaptador);
 
     }
@@ -72,7 +88,7 @@ public class Lista_especialidades_act extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Snackbar.make(Lista_especialidades_act.this.getCurrentFocus(), "Error al cargar la base de datos: " + databaseError.toException(), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(getActivity().getCurrentFocus(), "Error al cargar la base de datos: " + databaseError.toException(), Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -81,10 +97,10 @@ public class Lista_especialidades_act extends AppCompatActivity {
 
 
     public void inicialrComponentes() {
-        FirebaseApp.initializeApp(Lista_especialidades_act.this);
+        FirebaseApp.initializeApp(getActivity());
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        recyclerView = (RecyclerView) findViewById(R.id.miRecicleyViewEspecialidades);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Lista_especialidades_act.this);
+        recyclerView = (RecyclerView) v.findViewById(R.id.miRecicleyViewEspecialidades);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         lista_especialidades = new ArrayList<>();
