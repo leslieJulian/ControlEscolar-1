@@ -731,6 +731,7 @@ public class FragmentHorario extends Fragment{
                                                                                             materiasCargadas.add("");
                                                                                             materiasCargadas.add(gpo.getAula());
                                                                                             materiasCargadas.add("");
+                                                                                            materiasCargadas.add(gpo.getDocente());
                                                                                             Log.d("GPO:", gpo.getNombre());
                                                                                             break;
                                                                                         }
@@ -743,12 +744,12 @@ public class FragmentHorario extends Fragment{
                                                                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                                                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                                                                     Materia materia = snapshot.getValue(Materia.class);
-                                                                                                    for(int i=0; i<materiasCargadas.size(); i+= 6){
+                                                                                                    for(int i=0; i<materiasCargadas.size(); i+= 7){
                                                                                                         if(materiasCargadas.get(i+1).equals(snapshot.getKey())){
                                                                                                             materiasCargadas.set(i+1, materia.getNombreCorto());
                                                                                                             materiasCargadas.set(i+3, materia.getCreditos());
                                                                                                             boolean noColoreada = true;
-                                                                                                            for(int j=0; j<materiasCargadas.size(); j+= 6){
+                                                                                                            for(int j=0; j<materiasCargadas.size(); j+= 7){
                                                                                                                 if((materiasCargadas.get(i+1).equals(materiasCargadas.get(j+1)))&&(!materiasCargadas.get(j+5).equals(""))){
                                                                                                                     //Si ya existe la materia en el horario
                                                                                                                     materiasCargadas.set(i+5, materiasCargadas.get(j+5));
@@ -763,8 +764,17 @@ public class FragmentHorario extends Fragment{
                                                                                                         }
                                                                                                     }
                                                                                                 }
+                                                                                                TextView tvNombresMat = v.findViewById(R.id.materiasNomCorto);
+                                                                                                TextView tvDocentes = v.findViewById(R.id.docentes);
+                                                                                                String misMaterias = "", misDocentes = "";
                                                                                                 //FINALMENTE mostramos el horario
-                                                                                                for(int i=0; i<materiasCargadas.size(); i+=6){
+                                                                                                for(int i=0; i<materiasCargadas.size(); i+=7){
+                                                                                                    misMaterias += materiasCargadas.get(i+1)+"\n";
+                                                                                                    if(materiasCargadas.get(i+6) != null){
+                                                                                                        misDocentes += materiasCargadas.get(i+6)+"\n";
+                                                                                                    }else{
+                                                                                                        misDocentes += "SIN ASIGNAR\n";
+                                                                                                    }
                                                                                                     String clase = materiasCargadas.get(i+1)+", \nAula: "+materiasCargadas.get(i+4);
                                                                                                     switch(materiasCargadas.get(i+2)){
                                                                                                         case "07:00-08:00":
@@ -1379,6 +1389,8 @@ public class FragmentHorario extends Fragment{
                                                                                                             break;
                                                                                                     }
                                                                                                 }
+                                                                                                tvNombresMat.setText(misMaterias);
+                                                                                                tvDocentes.setText(misDocentes);
                                                                                             }
 
                                                                                             @Override
@@ -1423,6 +1435,9 @@ public class FragmentHorario extends Fragment{
         }
     }
     public static void limpiarCampos(){
+        TextView tvNombresMat = v.findViewById(R.id.materiasNomCorto);
+        TextView tvDocentes = v.findViewById(R.id.docentes);
+        tvNombresMat.setText(""); tvDocentes.setText("");
         //LUNES
         TextView lunes = v.findViewById(R.id.lunes7a8); lunes.setText("");
         lunes = v.findViewById(R.id.lunes8a9); lunes.setText("");
