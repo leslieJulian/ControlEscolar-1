@@ -17,28 +17,34 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lista_plan_estudios extends AppCompatActivity {
+public class Lista_plan_estudios extends Fragment {
     private ArrayList<PlanE> lista_planes;
     private ArrayList<String> listaKeys;
     private DatabaseReference databaseReference;
-
+    public View v;
     private RecyclerView recyclerView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_plan_estudios);
+    public Lista_plan_estudios() {
+    }
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.activity_lista_plan_estudios, container, false);
+
+        FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,15 +52,22 @@ public class Lista_plan_estudios extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
         inicialrComponentes();
+
+        return v;
+
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
 
 
     }
 
     public void iniciarAdaptador() {
 
-        PlanesAdaptador adaptador = new PlanesAdaptador(lista_planes, Lista_plan_estudios.this, listaKeys);
+        PlanesAdaptador adaptador = new PlanesAdaptador(lista_planes, getActivity(), listaKeys);
         recyclerView.setAdapter(adaptador);
 
     }
@@ -76,7 +89,7 @@ public class Lista_plan_estudios extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Snackbar.make(Lista_plan_estudios.this.getCurrentFocus(), "Error al cargar la base de datos: " + databaseError.toException(), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(getActivity().getCurrentFocus(), "Error al cargar la base de datos: " + databaseError.toException(), Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -85,10 +98,10 @@ public class Lista_plan_estudios extends AppCompatActivity {
 
 
     public void inicialrComponentes() {
-        FirebaseApp.initializeApp(Lista_plan_estudios.this);
+        FirebaseApp.initializeApp(getActivity());
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        recyclerView = (RecyclerView) findViewById(R.id.miRecicleyView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Lista_plan_estudios.this);
+        recyclerView = (RecyclerView) v.findViewById(R.id.miRecicleyView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         lista_planes = new ArrayList<>();

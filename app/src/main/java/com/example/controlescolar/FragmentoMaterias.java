@@ -32,9 +32,11 @@ public class FragmentoMaterias extends Fragment {
         Button especialidades = v.findViewById(R.id.btnEspecialidades);
 
         especialidades.setOnClickListener(esp);
-
+        Button planes = v.findViewById(R.id.btnPlanes);
+        planes.setOnClickListener(plan);
         return v;
     }
+
 
     View.OnClickListener esp = new View.OnClickListener() {
         @Override
@@ -48,4 +50,15 @@ public class FragmentoMaterias extends Fragment {
         }
     };
 
+    View.OnClickListener plan = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            Fragment este = null;
+            este = new Lista_plan_estudios();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.container, este).commit();
+        }
+    };
 }

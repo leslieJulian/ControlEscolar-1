@@ -46,7 +46,6 @@ public class Lista_especialidades_act extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
