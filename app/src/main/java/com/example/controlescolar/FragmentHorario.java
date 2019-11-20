@@ -771,7 +771,8 @@ public class FragmentHorario extends Fragment{
                                                                                                 for(int i=0; i<materiasCargadas.size(); i+=7){
                                                                                                     misMaterias += materiasCargadas.get(i+1)+"\n";
                                                                                                     if(materiasCargadas.get(i+6) != null){
-                                                                                                        misDocentes += materiasCargadas.get(i+6)+"\n";
+                                                                                                        String[] elementos = materiasCargadas.get(i+6).split(" ");
+                                                                                                        misDocentes += elementos[0]+" "+elementos[elementos.length-1]+"\n";
                                                                                                     }else{
                                                                                                         misDocentes += "SIN ASIGNAR\n";
                                                                                                     }

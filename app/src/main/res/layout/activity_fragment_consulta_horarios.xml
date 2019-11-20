@@ -52,6 +52,47 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="HORARIO DE CLASES"></TextView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tituloMat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Materia"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/doc"></TextView>
+            <TextView
+                android:id="@+id/materiasNom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                app:layout_constraintTop_toBottomOf="@id/tituloMat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/doc"></TextView>
+            <TextView
+                android:id="@+id/tituloDoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Docente"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/materiasNom"
+                app:layout_constraintEnd_toEndOf="parent"></TextView>
+            <TextView
+                android:id="@+id/doc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                app:layout_constraintTop_toBottomOf="@id/tituloDoc"
+                app:layout_constraintStart_toEndOf="@id/materiasNom"
+                app:layout_constraintEnd_toEndOf="parent"></TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"

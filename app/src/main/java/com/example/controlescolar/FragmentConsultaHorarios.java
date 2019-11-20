@@ -107,6 +107,7 @@ public class FragmentConsultaHorarios extends Fragment {
                                                                 materiasCargadas.add("");
                                                                 materiasCargadas.add(gpo.getAula());
                                                                 materiasCargadas.add("");
+                                                                materiasCargadas.add(gpo.getDocente());
                                                                 break;
                                                             }
                                                         }
@@ -118,7 +119,7 @@ public class FragmentConsultaHorarios extends Fragment {
                                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                                                         Materia materia = snapshot.getValue(Materia.class);
-                                                                        for (int i = 0; i < materiasCargadas.size(); i += 6) {
+                                                                        for (int i = 0; i < materiasCargadas.size(); i += 7) {
                                                                             if (materiasCargadas.get(i + 1).equals(snapshot.getKey())) {
                                                                                 materiasCargadas.set(i + 1, materia.getNombreCorto());
                                                                                 materiasCargadas.set(i + 3, materia.getCreditos());
@@ -127,8 +128,18 @@ public class FragmentConsultaHorarios extends Fragment {
                                                                             }
                                                                         }
                                                                     }
+                                                                    TextView tvNombresMat = v.findViewById(R.id.materiasNom);
+                                                                    TextView tvDocentes = v.findViewById(R.id.doc);
+                                                                    String misMaterias = "", misDocentes = "";
                                                                     //FINALMENTE mostramos el horario
-                                                                    for (int i = 0; i < materiasCargadas.size(); i += 6) {
+                                                                    for (int i = 0; i < materiasCargadas.size(); i += 7) {
+                                                                        misMaterias += materiasCargadas.get(i+1)+"\n";
+                                                                        if(materiasCargadas.get(i+6) != null){
+                                                                            String[] elementos = materiasCargadas.get(i+6).split(" ");
+                                                                            misDocentes += elementos[0]+" "+elementos[elementos.length-1]+"\n";
+                                                                        }else{
+                                                                            misDocentes += "SIN ASIGNAR\n";
+                                                                        }
                                                                         String clase = materiasCargadas.get(i + 1) + ", \nAula: " + materiasCargadas.get(i + 4);
                                                                         switch (materiasCargadas.get(i + 2)) {
                                                                             case "07:00-08:00":
@@ -1122,6 +1133,8 @@ public class FragmentConsultaHorarios extends Fragment {
                                                                                 }
                                                                                 break;
                                                                         }
+                                                                        tvNombresMat.setText(misMaterias);
+                                                                        tvDocentes.setText(misDocentes);
                                                                     }
                                                                 }
 
