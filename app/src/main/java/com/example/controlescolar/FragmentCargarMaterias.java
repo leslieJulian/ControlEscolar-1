@@ -272,7 +272,7 @@ public class FragmentCargarMaterias extends Fragment {
                                     //Si la materia es de especialidad, verificamos que coincida con la esp. del estudiante
                                     boolean es_especialidad = false;
                                     if(materia.getEspecialidad() != null){
-                                        if(materia.getEspecialidad().equals(especialidad)){
+                                        if((materia.getEspecialidad().equals(especialidad))||(especialidad.equals(""))){
                                             es_especialidad = true;
                                         }
                                     }else{
