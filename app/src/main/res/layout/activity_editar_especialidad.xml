@@ -12,6 +12,7 @@
         tools:ignore="MissingConstraints">
 
         <TextView
+            style="@style/estilo_titulo"
             android:id="@+id/textView22"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,6 +24,7 @@
             />
 
         <EditText
+            style="@style/estiloEntrada"
             android:id="@+id/tv_nombre_especialidadEditar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,18 +40,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="67dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_cancelar"
+                style="@style/btnCancelar"
                 android:layout_width="150dp"
-                android:onClick="regresar"
                 android:layout_height="wrap_content"
+                android:onClick="regresar"
                 android:text="Cancelar"></Button>
 
             <Button
                 android:id="@+id/btn_registrar_especialidad"
+                style="@style/btnAgregar"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:onClick="guardarEspecialidadEdicion"
