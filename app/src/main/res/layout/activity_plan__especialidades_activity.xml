@@ -12,7 +12,6 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/miCarviewListaPlanes_Especialidades"
             android:layout_width="match_parent"

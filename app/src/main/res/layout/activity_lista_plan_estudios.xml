@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Lista_plan_estudios">
 
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/miRecicleyView"
             android:layout_width="match_parent"
