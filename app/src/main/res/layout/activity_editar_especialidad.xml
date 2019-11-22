@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditarEspecialidad">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        android:orientation="vertical">
 
         <TextView
-            style="@style/estilo_titulo"
             android:id="@+id/textView22"
+            style="@style/estilo_titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Editar Especialidad" />
+
         <TextView
             android:id="@+id/tvt_plan_estudiosEspecialidadEditar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
         <EditText
-            style="@style/estiloEntrada"
             android:id="@+id/tv_nombre_especialidadEditar"
+            style="@style/estiloEntrada"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Nombre de la especialidad" />
+            android:hint="Nombre de la especialidad"
+            android:inputType="textPersonName" />
 
         <Switch
             android:id="@+id/switchEditarEspecialidad"
@@ -62,4 +62,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

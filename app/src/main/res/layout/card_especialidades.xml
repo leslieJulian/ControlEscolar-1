@@ -8,6 +8,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/azul"
+        android:layout_margin="5dp"
         android:background="#03AFA9A9">
 
         <LinearLayout
@@ -23,7 +25,8 @@
                 android:layout_margin="10dp"
                 android:inputType="textImeMultiLine"
                 android:text="publicacion"
-                android:textSize="@dimen/h2" />
+                android:textColor="@color/blanco"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tvt_nombreEspecialidad"
@@ -31,8 +34,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:inputType="textImeMultiLine"
+                android:textColor="@color/blanco"
                 android:text="publicacion"
-                android:textSize="@dimen/h2" />
+                android:textSize="18dp" />
 
 
         </LinearLayout>
